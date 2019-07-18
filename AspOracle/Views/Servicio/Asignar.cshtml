@@ -1,0 +1,419 @@
+﻿
+@{
+    ViewBag.Title = "Revisar";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+
+<style>
+    .disponible {
+        background-color: #00ff21;
+        width: 200px;
+        height: 150px;
+        border: solid 4px;
+        border-color: #000000;
+    }
+
+    .ocupado {
+        background-color: #ff0000;
+        width: 200px;
+        height: 150px;
+        border: solid 4px;
+        border-color: #000000;
+    }
+
+    .separador {
+    }
+
+        .separador td {
+            padding: 4px;
+        }
+</style>
+
+<script>
+
+    function cambiarEstados(nroHabitacion,idComedor,nombreHabitacion) {
+
+       //$('#modalEmpresas').click();
+
+            var valorSpan = $(nroHabitacion).find("span").eq(0).html();
+
+
+            if ($(nroHabitacion).hasClass("disponible")) {
+
+                swal({
+                    title: "Reserva de Comedores",
+                    text: 'Realmente desea Ocupar  la  "' + nombreHabitacion + '"? ',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Continuar",
+                    cancelButtonText: "Cancelar",
+                    closeOnConfirm: false
+                }, function (isConfirm) {
+                    if (isConfirm) {
+                        Metronic.blockUI({ message: '<div style="color:#BBB;"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i><br> cargando...</div>', boxed: true });
+
+                        //ingresarReservarHabitacion(idHabitacion);
+                        ingresarReservarComedor(idComedor);
+                        //alert("Habitacion Reservada");
+
+
+
+                       // $(nroHabitacion).removeClass("disponible");
+                       // $(nroHabitacion).find("span").eq(1).empty();
+                       // $(nroHabitacion).addClass("ocupado");
+                        //$(nroHabitacion).find("span").eq(1).append("(OCUPADA)")
+
+                    }
+                });
+
+
+
+
+
+            }
+            else {
+                //alert("Habitacion Desocupada");
+                //$(nroHabitacion).removeClass("ocupado");
+                //$(nroHabitacion).find("span").eq(1).empty();
+                //$(nroHabitacion).addClass("disponible");
+                //$(nroHabitacion).find("span").eq(1).append("(DISPONIBLE)")
+            }
+
+
+
+
+         //   alert("Usted Selecciono la Habitacion" + nroHabitacion);
+
+        }
+
+</script>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="portlet box blue-hoki">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-database "></i><br />Reservar Habitacion
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="table-scrollable" style="padding:10px;">
+                            <table cellspacing="10">
+                                <tbody>
+                                    <tr>
+                                        <td><input type="text" name="btnConsultaReserva" id="btnConsultaReserva" class="form-control" /></td>
+                                        <td><button style="position:relative; left:10px;" id="button-modal" class="btn blue" type="button" onclick="obtenerInformacionReserva()">Consultar Codigo</button></td>
+                                        <!--<td><a href="#modalDesocuparMesa" style="position:relative; left:15px;" data-toggle="modal" class="btn blue" >Desocupar Mesa</a></td>-->
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            @*<a href="#modalReservaHabitaciones" data-toggle="modal" class="btn btn-info" onclick="nuevaHabitacion()">
+                                    Ingresar Empresa
+                                </a>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="portlet box blue-hoki">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-database "></i><br />Detalle de Reserva
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="table-scrollable" style="padding:10px;">
+                            <table cellspacing="10">
+                                <tbody>
+                                    <tr>
+                                        <td><label class="col-md-3 control-label">Nombre Huesped</label></td>
+                                        <td><input type="text" name="nombreHuespedtxt" id="nombreHuespedtxt" readonly="readonly" class="form-control" /></td>
+                                        <td><label class="col-md-3 control-label">Apellido Huesped</label></td>
+                                        <td><input type="text" name="apellidoHuespedtxt" id="apellidoHuespedtxt" readonly="readonly" class="form-control" /></td>
+                                        <td><label class="col-md-3 control-label">Correo Huesped</label></td>
+                                        <td><input type="text" name="correoHuesped" id="correoHuesped" readonly="readonly" class="form-control" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="col-md-3 control-label">Nombre Empresa</label></td>
+                                        <td><input type="text" name="nombreEmpresatxt" id="nombreEmpresatxt" readonly="readonly" class="form-control" /></td>
+                                        <td><label class="col-md-3 control-label">Servicio Seleccionado</label></td>
+                                        <td><input type="text" name="serviciotxt" id="serviciotxt" readonly="readonly" class="form-control" /></td>
+                                        <td><label class="col-md-3 control-label">Servicio Valor</label></td>
+                                        <td><input type="text" name="servicioVtxt" id="servicioVtxt" readonly="readonly" class="form-control" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label style="display:none;"  id="labelCont" class="col-md-3 control-label">Menu</label></td>
+                                        <td><span style="display:none;" id="menuCont">@Html.Raw(ViewBag.selectMenu)</span></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <input type="hidden" id="huespedId" />
+                            <input type="hidden" id="empresaId" />
+                            @*<a href="#modalReservaHabitaciones" data-toggle="modal" class="btn btn-info" onclick="nuevaHabitacion()">
+                                    Ingresar Empresa
+                                </a>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        @*<div class="row">
+                <div class="col-sm-12">
+                    <div class="portlet box blue-hoki">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-building "></i>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>*@
+
+
+    </div>
+
+</div>
+
+
+
+<div style="background-color:#ffffff;width:1080px; height:800px;border:solid 4px;border-color:#000000">
+
+    @Html.Raw(ViewBag.Comedores)
+
+</div>
+
+
+
+
+
+    @section scripts {
+        <script>
+
+
+
+            var formReservaHabitaciones = $('#reservaHabitacionForm');
+
+                formReservaHabitaciones.Validador({
+                btnConsultaReserva: { required: [true, 'Debe Ingresar  El numero de reserva'] }
+
+
+            });
+
+
+            function nuevaHabitacion() {
+                $('#modalReservaHabitaciones').LimpiarModal();
+                $('#modal-title').html("Ingresar Habitaciones");
+                $('#button-modal').attr('onclick', 'ingresarReservarHabitacion()');
+                $('#button-modal').html("Ingresar Habitaciones");
+               // formReservaHabitaciones.validate().resetForm();
+            }
+
+
+
+
+
+            function ingresarReservarComedor(idcomedor) {
+
+              //  var empresaId = $('#empresaId').val();
+                var huespedId = $('#huespedId').val();
+                var comedorId = idcomedor;
+                var menuId = $('#menuId').val();
+                //var habitacionNombre = "COMEDOR " + $('#habitacionesSelect').val();
+                //var habitacionValor = $('#servicioVtxt').val();
+
+                //alert(empresaId);
+                //alert(huespedId);
+                //alert(habitacionId);
+                //alert(habitacionNombre);
+                //alert(habitacionValor);
+                Metronic.blockUI({ message: '<div style="color:#BBB;"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i><br> cargando...</div>', boxed: true });
+                $.post('ingresarDetalleComedor',
+                    {
+                       // empresaId: empresaId,
+                        huespedId: huespedId,
+                        comedorId: comedorId,
+                      //  habitacionNombre: habitacionNombre,
+                        menuId: menuId
+
+                    },
+                    function (rdata) {
+                        if (rdata["response"] === "success") {
+                            Metronic.unblockUI();
+                            swal({
+                                title: "Mantenedor de Comedores",
+                                text: "Comedor Seleccionado",
+                                type: "success",
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "Continuar"
+                            }, function () {
+
+
+
+
+                                location.reload();
+                            });
+
+                        } else {
+                            Metronic.unblockUI();
+                            swal({
+                                title: "Mantenedor de Comedores",
+                                text: rdata["message"],
+                                type: "error",
+                                confirmButtonText: "Continuar"
+                            });
+                        }
+
+
+                    });
+
+
+            }
+
+
+            function obtenerInformacionReserva() {
+
+                var codigoReserva = $('#btnConsultaReserva').val();
+
+                Metronic.blockUI({ message: '<div style="color:#BBB;"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i><br> cargando...</div>', boxed: true });
+
+                $.post('obtenerServiciosPorCodigo',
+                          {
+                              codigoReserva: codigoReserva
+
+                          },
+                          function (rdata) {
+
+
+
+                              var servicio = "";
+                              switch (rdata["servicioId"]) {
+                                  case 1:
+                                      servicio = "Servicio 1";
+                                      // alert(servicio);
+                                      break
+                                  case 2:
+                                      servicio = "Servicio 2";
+                                      // alert(servicio);
+                                      break;
+
+                                  case 3:
+                                      servicio = "Servicio 3";
+                                      //alert(servicio);
+                                      break;
+                                  case 4:
+                                      servicio = "Servicio 4";
+                                      //alert(servicio);
+                                      break;
+                              }
+
+                              $('#nombreHuespedtxt').val(rdata["nombreHuesped"]);
+                              $('#apellidoHuespedtxt').val(rdata["apellidoHuesped"]);
+                              $('#correoHuesped').val(rdata["correoHuesped"]);
+                              $('#nombreEmpresatxt').val(rdata["nombreEmpresa"]);
+                              $('#serviciotxt').val(servicio);
+                              $('#huespedId').val(rdata["huespedId"]);
+                              $('#empresaId').val(rdata["empresaId"]);
+                              $('#servicioVtxt').val(rdata["detalleServicioValor"]);
+                              $('#menuCont').css("display", "");
+                              $('#labelCont').css("display", "");
+                              Metronic.unblockUI();
+
+                              //$('#modalHuesped').modal("show");
+                              //$('#modal-title').html("Editar Huesped");
+                              //$('#button-modal').attr('onclick', 'editarHuesped()');
+                              //$('#button-modal').html("Editar Huesped");
+                              //$('#huespedId').val(rdata["huespedId"]);
+                              //Metronic.unblockUI();
+
+
+
+
+                          });
+            }
+
+
+
+            function liberarMesa(comedorId, nombreComedor) {
+
+
+                swal({
+                    title: "Mantenedor de Comedores",
+                    text: 'Realmente desea Liberar  el Comedor "' + nombreComedor + '"? ',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Continuar",
+                    cancelButtonText: "Cancelar",
+                    closeOnConfirm: false
+                }, function (isConfirm) {
+                    if (isConfirm) {
+                        Metronic.blockUI({ message: '<div style="color:#BBB;"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i><br> cargando...</div>', boxed: true });
+                        $.post('liberarComedor',
+                            {
+                                comedorId: comedorId
+
+                            },
+                            function (rdata) {
+                                if (rdata["response"] == "success") {
+                                    Metronic.unblockUI();
+                                    swal({
+                                        title: "Mantenedor de Comedores",
+                                        text: "Comedor Liberado",
+                                        type: "success",
+                                        confirmButtonColor: "#DD6B55",
+                                        confirmButtonText: "Continuar",
+                                    }, function () {
+                                        location.reload();
+                                    });
+
+                                } else {
+                                    Metronic.unblockUI();
+                                    swal({
+                                        title: "Mantenedor de Comedores",
+                                        text: rdata["message"],
+                                        type: "error",
+                                        confirmButtonText: "Continuar"
+                                    });
+                                }
+
+
+                            });
+
+                    }
+                });
+            }
+
+
+
+
+
+
+
+        </script>
+
+
+
+    }
+
+

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f664cc590d4946449b4d8ddfaaff626a" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.COMEDORES" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.DETALLE_COMEDORES" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.DETALLE_HABITACIONES" Width="1.5" PointX="8.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.DETALLE_SERVICIO" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EMPLEADOS" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EMPRESA" Width="1.5" PointX="0.75" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ESTADO_HABITACION" Width="1.5" PointX="3.75" PointY="21" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.HABITACION" Width="1.5" PointX="6" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.HUESPED" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.MENU" Width="1.5" PointX="3" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PERFILES_USUARIOS" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PROVEEDOR" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.USUARIOS" Width="1.5" PointX="6" PointY="9.875" IsExpanded="true" />
+        <AssociationConnector Association="Model.DTC_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.DTE_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.DTH_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.DTM_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.DHES_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.DHHA_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.DHHU_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.EPU_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.HUESPED_EMPRESA_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.USUARIOS_EMPRESA_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.HEH_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.PPU_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.UPU_FK" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.PRODUCTO" Width="1.5" PointX="5.25" PointY="14.5" />
+        <AssociationConnector Association="Model.PP_FK" />
+        <EntityTypeShape EntityType="Model.ORDEN_PEDIDO" Width="1.5" PointX="5.25" PointY="24.625" />
+        <AssociationConnector Association="Model.ORP_FK" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,167 @@
+﻿
+@{
+    ViewBag.Title = "Facturacion";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<h2>Facturacion</h2>
+
+			<!-- BEGIN PAGE CONTENT-->
+<div class="invoice">
+    <div class="row invoice-logo">
+        <div class="col-xs-6 invoice-logo-space">
+            <img src="~/Content/imagenes/hostal1.JPG" class="img-responsive" alt=""  />
+            <!--<img src="../../assets/admin/pages/media/invoice/walmart.png" />-->
+        </div>
+        <div class="col-xs-6">
+            <p>
+                # @Html.Raw(ViewBag.codigoReserva) / @Html.Raw(ViewBag.fechaFin)<span class="muted">
+                    
+                </span>
+            </p>
+        </div>
+    </div>
+    <hr />
+
+    <div class="row">
+        <div class="col-xs-4">
+            <h3>Cliente:</h3>
+            <ul class="list-unstyled">
+                <li>
+                    @Html.Raw(ViewBag.nombreEmpresa)
+                </li>
+                <li>
+                    @Html.Raw(ViewBag.rutEmpresa)
+                </li>
+                <li>
+                    @Html.Raw(ViewBag.correoEmpresa)
+                </li>
+                <li>
+                    @Html.Raw(ViewBag.direccionEmpresa)
+                </li>
+                <li>
+                    @Html.Raw(ViewBag.telefonoEmpresa)
+                </li>
+            </ul>
+        </div>
+        <div class="col-xs-4" style="visibility:hidden;" >
+            <h3>About:</h3>
+            <ul class="list-unstyled">
+                <li>
+                    Drem psum dolor sit amet
+                </li>
+                <li>
+                    Laoreet dolore magna
+                </li>
+                <li>
+                    Consectetuer adipiscing elit
+                </li>
+                <li>
+                    Magna aliquam tincidunt erat volutpat
+                </li>
+                <li>
+                    Olor sit amet adipiscing eli
+                </li>
+                <li>
+                    Laoreet dolore magna
+                </li>
+            </ul>
+        </div>
+        <div class="col-xs-4 invoice-payment">
+            <h3>Detalles de Pago:</h3>
+            <ul class="list-unstyled">
+                <li>
+                    <strong>Cuenta Nombre:</strong> Hostal Doña Clarita SPA
+                </li>
+                <li>
+                    <strong>Cuenta Numero:</strong> 0-0000-5678-9
+                </li>
+                <li>
+                    <strong>Cuenta Tipo:</strong> Corriente
+                </li>
+                <li>
+                    <strong>Banco:</strong> Santander
+                </li>
+                <li>
+                    <strong>Correo:</strong> ventas@hostaldoñaclarita.cl
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th class="hidden-480">
+                            Descripcion
+                        </th>
+                        <th class="hidden-480">
+                            Cantidad
+                        </th>
+                        <th>
+                            Total
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                   @Html.Raw(ViewBag.TablaFacture) 
+                
+                 </tbody>
+            </table>
+        </div>
+    </div>
+   
+     <div class="row">
+        <div class="col-xs-4">
+            <div class="well">
+                <address>
+                    <strong>Hostal Doña Clarita.</strong><br />
+                    Av. Templeman 92, Cerro Concepcion<br />
+                    <abbr title="Phone"T:</abbr> (9)92999420
+                </address>
+                <address>
+                    <strong>Contacto Reservas</strong><br />
+                    <a href="mailto:#">
+                        hostal@doñaclarita.com
+                    </a>
+                </address>
+            </div>
+        </div>
+        <div class="col-xs-8 invoice-block">
+            <ul class="list-unstyled amounts">
+                <li>
+                    <strong>Sub - Total:</strong> @Html.Raw(ViewBag.TotalFactura)
+                    
+                </li>
+                <li>
+                    <strong>Descuento :</strong> @Html.Raw(ViewBag.Descuento) 
+                </li>
+                <li>
+                    <strong>Total + Descuento :</strong> @Html.Raw(ViewBag.totalDescuentos) 
+                </li>
+                <li>
+                    <strong>Iva:</strong> 19%
+                </li>
+                <li>
+                    <strong>Grand Total:</strong> @Html.Raw(ViewBag.totalFinal)
+                </li>
+            </ul>
+            <br />
+            <a class="btn btn-lg blue hidden-print margin-bottom-5" onclick="javascript:window.print();">
+                Generar Documento <i class="fa fa-print"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+
+
+@section styles{
+
+<link href="~/Metronic/assets/admin/pages/css/invoice.css" rel="stylesheet" />
+
+}

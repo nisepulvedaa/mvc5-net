@@ -1,0 +1,262 @@
+﻿
+@{
+    ViewBag.Title = "OrdenPedido";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+
+
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="portlet box blue-hoki">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-database "></i>Mantenedor de Orden de pedido
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="table-scrollable" style="padding:10px;">
+                            <a href="#modalProveedor" data-toggle="modal" class="btn btn-info" onclick="nuevoProveedor();">
+                                Ingresar Orden de Pedido
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="portlet box blue-hoki">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-building "></i>Lista de Ordenes de Pedido
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="table-scrollable" style="padding:10px;">
+                            <table id="example" class="table table-striped table-bordered table-hover" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Codigo</th>
+                                        <th>Proveedor</th>
+                                        <th>Productos</th>
+                                        <th>Cantidad</th>
+                                        <!-- <th>Perfil</th>-->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @Html.Raw(ViewBag.TablaOrdenesPedido)
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div aria-hidden="true" role="dialog" tabindex="-1" id="modalProveedor" class="modal fade bs-modal-lg" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button"></button>
+                <h4 id="modal-title" class="modal-title">Ingresar Orden De Pedido</h4>
+            </div>
+            <div class="modal-body sacModal">
+                <form id="OrdenForm">
+
+                    
+
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Proveedor </label>
+                                <div class="col-md-9">
+                                    @Html.Raw(ViewBag.SelectProveedor)
+                                    <!--<input type="text" id="proveedorContacto" name="proveedorContacto" placeholder="Contacto del Proveedor..." class="form-control">-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Producto </label>
+                                <div class="col-md-9" id="div_productos">
+                                    <select class="form-control js-example-basic-multiple" id="productos" name="states[]" multiple="multiple">
+                                        <option value="AL">Alabama</option>
+                                        <option value="AL1">Alabama1</option>
+                                        <option value="AL2">Alabama2</option>
+                                        <option value="AL3">Alabama3</option>
+                                        <option value="AL4">Alabama4</option>
+                                        <option value="WY">Wyoming5</option>
+                                    </select>
+
+
+                                    <!--<input type="text" id="proveedorContacto" name="proveedorContacto" placeholder="Contacto del Proveedor..." class="form-control">-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-sm-12">
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Cantida a Solicitar </label>
+                                <div class="col-md-9">
+                                    <input type="text" id="cantidadProducto" name="cantidadProducto" placeholder="stock del producto" class="form-control">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                  
+
+                
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn default" type="button">Cerrar</button>
+                <button id="button-modal" class="btn blue" type="button" onclick="ingresarOrdenDePedido()">Ingresar Orden de Pedido</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@section styles{
+    <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/SAC.css" rel="stylesheet" />
+    <link href="~/Content/js/select2.min.css" rel="stylesheet" />
+}
+
+@section scripts {
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <!--<script src="~/Metronic/assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>-->
+    <!--<script src="~/Metronic/assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>-->
+
+<script src="~/Content/js/select2.min.js"></script>
+    <script>
+
+      
+
+        $(document).ready(function () {
+            $('.js-example-basic-multiple').select2();
+
+        
+        });
+
+        $('#example').dataTable(datatables_options);
+
+        function seleccionarProduto(productoId)
+        {
+
+            var productoId = $('#proveedorId').val();
+
+
+             $.post('obtenerProductoPorId',
+                      {
+                          productoId: productoId
+
+                      },
+                      function (rdata) {
+
+
+
+                          $('#div_productos').empty();
+                          $('#div_productos').append(rdata["productoSelect"]);
+                          $('#productoId').select2();
+                          $('#productoId').trigger();
+                          //$('#nombreComedor').val(rdata["nombreComedor"]);
+                          //$('#capacidadComedor').val(rdata["capacidadComedor"]);
+
+
+                          //$('#modalComedores').modal("show");
+                          //$('#modal-title').html("Editar Comedor");
+                          //$('#button-modal').attr('onclick', 'editarComedor()');
+                          //$('#button-modal').html("Editar Comedor");
+                          //$('#comedorId').val(rdata["idComedor"]);
+                          //Metronic.unblockUI();
+
+
+
+
+                      });
+        }
+
+
+
+        function ingresarOrdenDePedido() {
+
+            //formProductos.validate();
+            //if (formProductos.valid()) {
+
+            var proveedorId = $('#proveedorId').val();
+            var fruta = [];
+
+
+            var productos = $('#productoId').val();
+            var cantidadProducto = $('#cantidadProducto').val();
+
+          
+            
+              
+
+                Metronic.blockUI({ message: '<div style="color:#BBB;"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i><br> cargando...</div>', boxed: true });
+                $.post('ingresarOrdenDePedido',
+                    {
+
+                        proveedorId: proveedorId,
+                        productos: productos,
+                        cantidadProducto: cantidadProducto
+                    },
+                    function (rdata) {
+                        if (rdata["response"] === "success") {
+                            Metronic.unblockUI();
+                            swal({
+                                title: "Mantenedor de Ordenes de Pedidos",
+                                text: "Orden Generada",
+                                type: "success",
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "Continuar"
+                            }, function () {
+                                location.reload();
+                            });
+
+                        } else {
+                            Metronic.unblockUI();
+                            swal({
+                                title: "Mantenedor de Ordenes de Pedidos",
+                                text: rdata["message"],
+                                type: "error",
+                                confirmButtonText: "Continuar"
+                            });
+                        }
+                    });
+            }
+        //}
+
+    </script>
+
+
+
+}
+
+

@@ -1,0 +1,602 @@
+﻿
+@{
+    ViewBag.Title = "Solicitar";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+
+<style>
+    .separador {
+    }
+
+        .separador td {
+            padding: 4px;
+        }
+
+    .pricing-content li {
+        background-color: #fffff !important;
+        list-style-position: inside !important;
+    }
+
+
+
+
+
+
+</style>
+
+<div class="content">
+    <h1>Solicitar Servicios</h1>
+    <script>
+        $(function () {
+            var wizard =
+
+            $("#wizard").steps({
+                headerTag: "h2",
+                bodyTag: "section",
+                transitionEffect: "slideLeft",
+                autoFocus: true,
+                onStepChanging: function (event, currentIndex, newIndex) {
+                    console.log(">>>" + currentIndex + " - " + newIndex);
+                    var paso = $("#wizard").steps("getCurrentIndex");
+                    // console.log(paso+1);
+                    if (newIndex > currentIndex) {
+                        return validarStep(newIndex);
+                    } else {
+
+                        return true;
+                    }
+
+                },
+                onFinishing: function (event, currentIndex) {
+
+                    solicitarSevicios();
+                    return true;
+                }
+
+            });
+        });
+    </script>
+    <div id="wizard">
+        <h2>Paso 1</h2>
+        <section>
+            <p>
+                Bienvenido al asistente de reserva de servicios del hostal de doña clarita por favor presiones en el boton siguiente para realizar el proceso de reserva.
+            </p>
+        </section>
+        <h2>Paso 2</h2>
+        <section>
+            <p>
+
+
+                @Html.Raw(ViewBag.Table)
+            </p>
+        </section>
+        <h2>Paso 3</h2>
+        <section>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- BEGIN INLINE NOTIFICATIONS PORTLET-->
+                    <div class="portlet">
+                        <div class="portlet-body">
+                            <div class="row margin-bottom-40">
+                                <!-- Pricing -->
+                                <div class="col-md-3">
+                                    <div class="pricing hover-effect" style="background-color:#ffffff !important;">
+                                        <div class="pricing-head">
+                                            <h3>
+                                                Servicio 1 <span>
+                                                    Alojamiento
+                                                </span>
+                                            </h3>
+                                            <h4>
+                                                <i>$</i>25000<i></i>
+                                                <span>
+                                                    1 Huesped Por Día
+                                                </span>
+                                            </h4>
+                                        </div>
+                                        <ul class="pricing-content list-unstyled">
+                                            <li>
+                                                <i class="fa fa-tags"></i> Wifi
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-asterisk"></i> Televisores
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-heart"></i> Amplio Menu
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-star"></i>Personal Capacitado
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-shopping-cart"></i> Servicio 24/7
+                                            </li>
+                                        </ul>
+                                        <div class="pricing-footer">
+
+                                            <br />
+
+                                            <div onclick="seleccionarServicio(1)">
+                                                <input type="radio" class="servicio" id="servicio1" value="servicio1">Seleccionar
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="pricing hover-effect" style="background-color:#ffffff !important;">
+                                        <div class="pricing-head">
+                                            <h3>
+                                                Servicio 2 <span>
+                                                    Alojamineto + Acceso a Comedor (Desayunos)
+                                                </span>
+                                            </h3>
+                                            <h4>
+                                                <i>$</i>35000<i></i>
+                                                <span>
+                                                    1 Huesped Por Día
+                                                </span>
+                                            </h4>
+                                        </div>
+                                        <ul class="pricing-content list-unstyled">
+                                            <li>
+                                                <i class="fa fa-tags"></i> Wifi
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-asterisk"></i> Televisores
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-heart"></i> Amplio Menu
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-star"></i> Personal Capacitado
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-shopping-cart"></i> Servicio 24/7
+                                            </li>
+                                        </ul>
+                                        <div class="pricing-footer">
+
+                                            <br />
+                                            <div onclick="seleccionarServicio(2)">
+                                                <input type="radio" class="servicio" id="servicio2" value="servicio2">Seleccionar
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="pricing hover-effect" style="background-color:#ffffff !important;">
+                                        <div class="pricing-head">
+                                            <h3>
+                                                Servicio 3 <span>
+                                                    Alojamineto + Acceso a Comedor (Des + Alm)
+                                                </span>
+                                            </h3>
+                                            <h4>
+                                                <i>$</i>45000<i></i>
+                                                <span>
+                                                    1 Huesped Por Día
+                                                </span>
+                                            </h4>
+                                        </div>
+                                        <ul class="pricing-content list-unstyled">
+                                            <li>
+                                                <i class="fa fa-tags"></i>Wifi
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-asterisk"></i> Televisores
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-heart"></i> Amplio Menu
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-star"></i> Personal Capacitado
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-shopping-cart"></i> Servicio 24/7
+                                            </li>
+                                        </ul>
+                                        <div class="pricing-footer">
+                                            <br />
+                                            <div onclick="seleccionarServicio(3)">
+                                                <input type="radio" class="servicio" id="servicio3" value="servicio3">Seleccionar
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="col-md-3">
+                                    <div class="pricing hover-effect" style="background-color:#ffffff !important;">
+                                        <div class="pricing-head">
+                                            <h3>
+                                                Servicio 4  <span>
+                                                    Alojamineto + Acceso a Comedor (Todo Incluido)
+                                                </span>
+                                            </h3>
+                                            <h4>
+                                                <i>$</i>55000<i></i>
+                                                <span>
+                                                    1 Huesped Por Día
+                                                </span>
+                                            </h4>
+                                        </div>
+                                        <ul class="pricing-content list-unstyled">
+                                            <li>
+                                                <i class="fa fa-tags"></i> Wifi
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-asterisk"></i> Televisores
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-heart"></i> Amplio Menu
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-star"></i> Personal Capacitado
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-shopping-cart"></i> Servicio 24/7
+                                            </li>
+                                        </ul>
+                                        <div class="pricing-footer">
+
+                                            <br />
+                                            <div onclick="seleccionarServicio(4)">
+                                                <input type="radio" class="servicio" id="servicio4" value="servicio4">Seleccionar
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!--//End Pricing -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END INLINE NOTIFICATIONS PORTLET-->
+                </div>
+            </div>
+            <!-- END PAGE CONTENT-->
+
+        </section>
+        <h2>Paso 4</h2>
+        <section>
+            <h1>Detalle Del Servicio</h1>
+
+            <table width="100%" border="0"  cellspacing="10" cellpadding="10">
+                <tr>
+                    <td>
+                        <div id="usuarios">
+                            <h1>Usuarios:</h1>
+                            <div id="resumen_usuarios"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div id="codigo">
+                                <h1>Codigo de Rerserva:</h1><b></b><span id="codigoReserva"></span></b>
+                            </div>
+                    </td>
+                <tr>
+                    <td>
+                        <div id="servicios">
+                            <h1>Servicios:</h1>
+                            <div id="resumen_servicios"></div>
+                        </div>
+                    </td>
+                    <td>
+                        
+                    </td>
+
+                </tr>
+                <tr>
+                    <td><br /><h1>Fecha Inicio:</h1> <input id="fechaInicio" class="form-control form-control-inline input-medium date-picker" size="16" type="text" value=""></td>
+                    <td><br /><h1>Fecha Fin:</h1> <input id="fechaFin" class="form-control form-control-inline input-medium date-picker" size="16" type="text" value=""></td>
+
+                </tr>
+                   
+               
+             
+            </table>
+
+         
+
+
+        
+
+            
+
+
+
+
+
+
+        </section>
+    </div>
+</div>
+
+
+@section styles{
+
+    <link href="~/Metronic/assets/admin/pages/css/pricing-tables.css" rel="stylesheet" />
+    <link href="~/Metronic/assets/admin/pages/css/pricing-table.css" rel="stylesheet" />
+
+    <link href="~/Content/plugins/jquery-step/css/jquery.steps.css" rel="stylesheet" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+   
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <!-- END PAGE LEVEL STYLES -->
+}
+
+@section scripts {
+
+    <script src="~/Content/plugins/jquery-step/lib/jquery.cookie-1.3.1.js"></script>
+    <script src="~/Content/plugins/jquery-step/build/jquery.steps.js"></script>
+    <script src="~/Content/js/SAC.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+    <script>
+
+        function seleccionarTodos() {
+            // alert("entro");
+
+            var arrNumber = new Array();
+            $('.case').each(function () {
+
+
+
+
+
+                if (!$("#selectall").parent("span").hasClass("checked")) {
+
+                    if ($(this).parent("span").hasClass("checked")) {
+
+                    } else {
+                        $(this).parent("span").toggleClass("checked");
+                    }
+
+
+                } else {
+                    if ($(this).parent("span").hasClass("checked")) {
+                        $(this).parent("span").toggleClass("checked");
+                    } else {
+
+                    }
+
+
+                }
+
+
+            })
+
+        }
+
+        function aleatorio(minimo, maximo) {
+            return Math.round(Math.random() * (maximo - minimo) + minimo);
+        }
+
+        function seleccionarServicio(valorServicio) {
+
+
+            $(".servicio").parent("span").removeClass("checked");
+            $('#servicio' + valorServicio).parent("span").toggleClass("checked");
+
+        }
+
+        function validarStep(step) {
+
+            switch (step) {
+                case 0:
+                    return true;
+                    break;
+
+                case 1:
+                    //alert("entro al paso 2");
+                    return true;
+                    break;
+                case 2:
+                    //if (!$("#selectall").parent("span").hasClass("checked")) {
+                    var c = 0;
+                    $('.case').each(function () {
+                        if ($(this).parent("span").hasClass("checked")) {
+                            c = c + 1;
+                        }
+                    });
+                    if (c == 0) {
+                        alert("debe seleccionar un Usuario");
+
+                        return false;
+                    } else {
+                        return true;
+                    }
+
+                    break;
+                case 3:
+                    if ($('#wizard-p-2').find('span.checked').size() == 0) {
+                        alert("Debe seleccionar un Servicio");
+                        return false;
+                    } else {
+
+
+                        var usuarios = '';
+                        var usuarioID = '';
+                        var servicioId = '';
+                        $('#wizard-p-1').find("span.checked").each(function () {
+                            var columns = $(this).parents("tr").find("td");
+                            var id = $(this).find("input").eq(0).val();
+                            if (usuarioID.length > 0) {
+                                usuarioID = usuarioID + ",";
+                            }
+                            usuarioID = usuarioID + id;
+                            usuarios = usuarios + columns.eq(1).html() + "<br>";
+                        });
+
+                        servicioId = $('#wizard-p-2').find('span.checked').find("input").eq(0).val();
+                        //  console.log("Servicioooooo "+ servicioId.replace("servicio", ""));
+                        //var servicio = "";
+                        switch (servicioId) {
+                            case "servicio1":
+                                servicio = "Servicio 1";
+                                // alert(servicio);
+                                break;
+                            case "servicio2":
+                                servicio = "Servicio 2";
+                                // alert(servicio);
+                                break;
+
+                            case "servicio3":
+                                servicio = "Servicio 3";
+                                //alert(servicio);
+                                break;
+                            case "servicio4":
+                                servicio = "Servicio 4";
+                                //alert(servicio);
+                                break;
+                        }
+                        //if()
+                        var codigoReserva = aleatorio(111111, 999999);
+
+                        $('#resumen_usuarios').html(usuarios);
+                        $('#resumen_servicios').html(servicio);
+                        $('#codigoReserva').html(codigoReserva);
+                        
+                        console.log(usuarioID);
+                        console.log(servicioId);
+                        //alert(codigoReserva);
+
+
+
+
+
+                        return true;
+                    }
+
+            }
+
+
+        }
+
+
+        function solicitarSevicios() {
+
+
+            var usuarios = '';
+            var usuarioID = '';
+            var servicioId = '';
+            $('#wizard-p-1').find("span.checked").each(function () {
+                var columns = $(this).parents("tr").find("td");
+                var id = $(this).find("input").eq(0).val();
+                if (usuarioID.length > 0) {
+                    usuarioID = usuarioID + ",";
+                }
+                usuarioID = usuarioID + id;
+                usuarios = usuarios + columns.eq(1).html() + "<br>";
+            });
+
+            servicioId = $('#wizard-p-2').find('span.checked').find("input").eq(0).val();
+            sidn = 0;
+            switch (servicioId) {
+                case "servicio1":
+                    servicio = "Servicio 1";
+                    sidn = 1;
+                    break;
+                case "servicio2":
+                    servicio = "Servicio 2";
+                    sidn = 2;
+                    break;
+
+                case "servicio3":
+                    servicio = "Servicio 3";
+                    sidn = 3;
+                    break;
+                case "servicio4":
+                    servicio = "Servicio 4";
+                    sidn = 4;
+                    break;
+            }
+
+
+
+            var usuariosHuesped = usuarioID;
+            var servicios = sidn;
+            var codigoServicio = $('#codigoReserva').html();
+            //alert(codigoServicio);
+
+            var fechaInicio = $('#fechaInicio').val();
+            var fechaFin = $('#fechaFin').val();
+
+            Metronic.blockUI({ message: '<div style="color:#BBB;"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i><br> cargando...</div>', boxed: true });
+
+
+            $.post('IngresarDetalleDeServicio',
+                {
+                    usuariosHuesped: usuariosHuesped,
+                    servicios: servicios,
+                    codigoServicio: codigoServicio,
+                    fechaInicio: fechaInicio,
+                    fechaFin: fechaFin
+
+                },
+                function (rdata) {
+                    if (rdata["response"] === "success") {
+                        Metronic.unblockUI();
+                        swal({
+                            title: "Solicitar Servicios",
+                            text: "Servicio Solicitado",
+                            type: "success",
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "Continuar"
+                        }, function () {
+                            location.reload();
+                        });
+
+                    } else {
+                        Metronic.unblockUI();
+                        swal({
+                            title: "Solicitar Servicioss",
+                            text: rdata["message"],
+                            type: "error",
+                            confirmButtonText: "Continuar"
+                        });
+                    }
+
+
+                });
+        }
+
+        //var esperarWizard = false;
+
+        $(document).ready(function () {
+            $("#fechaInicio").datepicker({
+                dateFormat: 'dd/mm/yy'
+            });
+            $("#fechaFin").datepicker({
+                dateFormat: 'dd/mm/yy'
+            });
+       });
+
+
+
+
+
+        //})
+
+
+
+
+    </script>
+
+}
+
+

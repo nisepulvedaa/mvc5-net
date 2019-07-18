@@ -1,0 +1,555 @@
+﻿
+@{
+    ViewBag.Title = "Revisar";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+
+<style>
+    .disponible {
+        background-color: #00ff21;
+        width: 200px;
+        height: 150px;
+        border: solid 4px;
+        border-color: #000000;
+    }
+
+    .ocupado {
+        background-color: #ff0000;
+        width: 200px;
+        height: 150px;
+        border: solid 4px;
+        border-color: #000000;
+    }
+
+    .separador {
+    }
+
+        .separador td {
+            padding: 4px;
+        }
+</style>
+
+<script>
+
+    function cambiarEstados(nroHabitacion,idHabitacion,nombreHabitacion) {
+
+       //$('#modalEmpresas').click();
+
+            var valorSpan = $(nroHabitacion).find("span").eq(0).html();
+
+
+            if ($(nroHabitacion).hasClass("disponible")) {
+
+                swal({
+                    title: "Reserva de Habitaciones",
+                    text: 'Realmente desea Ocupar  la  "' + nombreHabitacion + '"? ',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Continuar",
+                    cancelButtonText: "Cancelar",
+                    closeOnConfirm: false
+                }, function (isConfirm) {
+                    if (isConfirm) {
+                        Metronic.blockUI({ message: '<div style="color:#BBB;"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i><br> cargando...</div>', boxed: true });
+                        
+                        ingresarReservarHabitacion(idHabitacion);
+                        //alert("Habitacion Reservada");
+
+
+
+                       // $(nroHabitacion).removeClass("disponible");
+                       // $(nroHabitacion).find("span").eq(1).empty();
+                       // $(nroHabitacion).addClass("ocupado");
+                        //$(nroHabitacion).find("span").eq(1).append("(OCUPADA)")
+
+                    }
+                });
+
+
+
+            
+
+            }
+            else {
+                //alert("Habitacion Desocupada");
+                //$(nroHabitacion).removeClass("ocupado");
+                //$(nroHabitacion).find("span").eq(1).empty();
+                //$(nroHabitacion).addClass("disponible");
+                //$(nroHabitacion).find("span").eq(1).append("(DISPONIBLE)")
+            }
+
+
+
+
+         //   alert("Usted Selecciono la Habitacion" + nroHabitacion);
+
+        }
+
+</script>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="portlet box blue-hoki">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-database "></i><br />Reservar Habitacion
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="table-scrollable" style="padding:10px;">
+                            <table cellspacing="10">
+                                <tbody>
+                                    <tr>
+                                        <td><input type="text" name="btnConsultaReserva" id="btnConsultaReserva" class="form-control" /></td>
+                                        <td><button  style="position:relative; left:10px;" id="button-modal" class="btn blue" type="button" onclick="obtenerInformacionReserva()">Consultar Codigo</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            @*<a href="#modalReservaHabitaciones" data-toggle="modal" class="btn btn-info" onclick="nuevaHabitacion()">
+                                Ingresar Empresa
+                            </a>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="portlet box blue-hoki">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-database "></i><br />Detalle de Reserva
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="table-scrollable" style="padding:10px;">
+                            <table cellspacing="10">
+                                <tbody>
+                                    <tr>
+                                        <td><label class="col-md-3 control-label">Nombre Huesped</label></td>
+                                        <td><input type="text" name="nombreHuespedtxt" id="nombreHuespedtxt" readonly="readonly"  class="form-control" /></td>
+                                        <td><label class="col-md-3 control-label">Apellido Huesped</label></td>
+                                        <td><input type="text" name="apellidoHuespedtxt" id="apellidoHuespedtxt" readonly="readonly" class="form-control" /></td>
+                                        <td><label class="col-md-3 control-label">Correo Huesped</label></td>
+                                        <td><input type="text" name="correoHuesped" id="correoHuesped" readonly="readonly" class="form-control" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label class="col-md-3 control-label">Nombre Empresa</label></td>
+                                        <td><input type="text" name="nombreEmpresatxt" id="nombreEmpresatxt" readonly="readonly" class="form-control" /></td>
+                                        <td><label class="col-md-3 control-label">Servicio Seleccionado</label></td>
+                                        <td><input type="text" name="serviciotxt" id="serviciotxt" readonly="readonly" class="form-control" /></td>
+                                        <td><label class="col-md-3 control-label">Servicio Valor</label></td>
+                                        <td><input type="text" name="servicioVtxt" id="servicioVtxt" readonly="readonly" class="form-control" /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <input type="hidden"  id="huespedId" />
+                            <input type="hidden" id="empresaId" />
+                            @*<a href="#modalReservaHabitaciones" data-toggle="modal" class="btn btn-info" onclick="nuevaHabitacion()">
+                                Ingresar Empresa
+                            </a>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        @*<div class="row">
+            <div class="col-sm-12">
+                <div class="portlet box blue-hoki">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-building "></i>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+
+        </div>*@
+
+
+    </div>
+
+</div>
+
+
+
+<div style="background-color:#ffffff;width:1080px; height:800px;border:solid 4px;border-color:#000000">
+
+    @*<table class="separador">
+            <thead></thead>
+            <tbody>
+                <tr>
+                    <td><div class="disponible" onclick="cambiarEstados(this)"><span><center>Habitacion N 1<br /><span>(DISPONIBLE)</span></center></span></div></td>
+                    <td><div class="disponible" onclick="cambiarEstados(this)"><span><center>Habitacion N 2<br /><span>(DISPONIBLE)</span></center></span></div></td>
+                    <td><div class="disponible" onclick="cambiarEstados(this)"><span><center>Habitacion N 3<br /><span>(DISPONIBLE)</span></center></span></div></td>
+                    <td><div class="disponible" onclick="cambiarEstados(this)"><span><center>Habitacion N 4<br /><span>(DISPONIBLE)</span></center></span></div></td>
+                    <td><div class="disponible" onclick="cambiarEstados(this)"><span><center>Habitacion N 5<br /><span>(DISPONIBLE)</span></center></span></div></td>
+                </tr>
+                <tr>
+                    <td><div class="disponible" onclick="cambiarEstados(this)"><span><center>Habitacion N 6<br /><span>(DISPONIBLE)</span></center></span></div></td>
+                    <td><div class="disponible" onclick="cambiarEstados(this)"><span><center>Habitacion N 7<br /><span>(DISPONIBLE)</span></center></span></div></td>
+                    <td><div class="disponible" onclick="cambiarEstados(this)"><span><center>Habitacion N 8<br /><span>(DISPONIBLE)</span></center></span></div></td>
+                    <td><div class="disponible" onclick="cambiarEstados(this)"><span><center>Habitacion N 9<br /><span>(DISPONIBLE)</span></center></span></div></td>
+                    <td><div class="disponible" onclick="cambiarEstados(this)"><span><center>Habitacion N 10<br /><span>(DISPONIBLE)</span></center></span></div></td>
+                </tr>
+                <tr>
+                    <td><div class="disponible" onclick="cambiarEstados(this)"><span <center>Habitacion N 11<br /><span>(DISPONIBLE)</span></center></span></div></td>
+                    <td><div class="disponible" onclick="cambiarEstados(this)"><span><center>Habitacion N 12<br /><span>(DISPONIBLE)</span></center></span></div></td>
+                    <td><div class="disponible" onclick="cambiarEstados(this)"><span><center>Habitacion N 13<br /><span>(DISPONIBLE)</span></center></span></div></td>
+                    <td><div class="disponible" onclick="cambiarEstados(this)"><span><center>Habitacion N 14<br /><span>(DISPONIBLE)</span></center></span></div></td>
+                    <td><div class="disponible" onclick="cambiarEstados(this)"><span><center>Habitacion N 15<br /><span>(DISPONIBLE)</span></center></span></div></td>
+                </tr>
+                <tr>
+                    <td><div class="disponible" onclick="cambiarEstados(this)"><span <center>Habitacion N 16<br /><span>(DISPONIBLE)</span></center></span></div></td>
+                    <td><div class="disponible" onclick="cambiarEstados(this)"><span><center>Habitacion N 17<br /><span>(DISPONIBLE)</span></center></span></div></td>
+                    <td><div class="disponible" onclick="cambiarEstados(this)"><span><center>Habitacion N 18<br /><span>(DISPONIBLE)</span></center></span></div></td>
+                    <td><div class="disponible" onclick="cambiarEstados(this)"><span><center>Habitacion N 19<br /><span>(DISPONIBLE)</span></center></span></div></td>
+                    <td><div class="disponible" onclick="cambiarEstados(this)"><span><center>Habitacion N 20<br /><span>(DISPONIBLE)</span></center></span></div></td>
+                </tr>
+                <tr>
+                    <td><div class="disponible" onclick="cambiarEstados(this)"><span <center>Habitacion N 21<br /><span>(DISPONIBLE)</span></center></span></div></td>
+                    <td><div class="disponible" onclick="cambiarEstados(this)"><span><center>Habitacion N 22<br /><span>(DISPONIBLE)</span></center></span></div></td>
+                    <td><div class="disponible" onclick="cambiarEstados(this)"><span><center>Habitacion N 23<br /><span>(DISPONIBLE)</span></center></span></div></td>
+                    <td><div class="disponible" onclick="cambiarEstados(this)"><span><center>Habitacion N 24<br /><span>(DISPONIBLE)</span></center></span></div></td>
+                    <td><div class="disponible" onclick="cambiarEstados(this)"><span><center>Habitacion N 25<br /><span>(DISPONIBLE)</span></center></span></div></td>
+                </tr>
+            </tbody>
+        </table>*@
+
+    @Html.Raw(ViewBag.Habitaciones)
+
+
+</div>
+
+
+
+
+
+<div aria-hidden="true" role="dialog" tabindex="-1" id="modalReservaHabitaciones" class="modal fade bs-modal-lg" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button"></button>
+                <h4 id="modal-title" class="modal-title">Ingresar Empresa</h4>
+            </div>
+            <div class="modal-body sacModal">
+                <form id="reservaHabitacionForm">
+
+                    <div class="row">
+                        <div class="col-sm-12">
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Habitacion</label>
+                                <div class="col-md-9">
+                                    @Html.Raw(ViewBag.HabitacionesSelect)
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Empresa</label>
+                                <div class="col-md-9">
+                                    @Html.Raw(ViewBag.HabitacionesSelectEmpresas)
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Huespeded</label>
+                                <div id="selectHuespedes" class="col-md-9">
+                                    <select id="selectHabitaciones">
+                                        <optio value=0>SELECCIONE UNA OPCION</option>
+                                    </select>
+                                    @*<input type="text" id="correoEmpresa" name="correoEmpresa" placeholder="example@yourdomain.cl..." class="form-control">*@
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Valor Habitacion</label>
+                                <div class="col-md-9">
+                                    <input type="text" id="valorHabitacion" name="valorHabitacion" placeholder="Valor Habitacion..." class="form-control">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <!--<input type="hidden" id="empresaId" />-->>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn default" type="button">Cerrar</button>
+                <button id="button-modal" class="btn blue" type="button" onclick="ingresarReservarHabitacion()">Ingresar Detalle</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    @section scripts {
+        <script>
+
+
+
+            var formReservaHabitaciones = $('#reservaHabitacionForm');
+
+                formReservaHabitaciones.Validador({
+                btnConsultaReserva: { required: [true, 'Debe Ingresar  El numero de reserva'] }
+
+
+            });
+
+
+            function nuevaHabitacion() {
+                $('#modalReservaHabitaciones').LimpiarModal();
+                $('#modal-title').html("Ingresar Habitaciones");
+                $('#button-modal').attr('onclick', 'ingresarReservarHabitacion()');
+                $('#button-modal').html("Ingresar Habitaciones");
+               // formReservaHabitaciones.validate().resetForm();
+            }
+
+
+            function obtenerListaHuespedes() {
+
+                var empresaId = $('#empresasSelect').val();
+                $.post('obtenerSelectHuespedes',
+                          {
+                              empresaId: empresaId
+
+                          },
+                          function (rdata) {
+                              $('#selectHuespedes').empty();
+                              $('#selectHuespedes').append(rdata["selectHuespedes"]);
+
+                              //$('#proveedorNombre').val(rdata["proveedorNombre"]);
+                              //$('#proveedorContacto').val(rdata["proveedorContacto"]);
+                              //$('#proveedorRubro').val(rdata["proveedorRubro"]);
+                              //$('#proveedorDireccion').val(rdata["proveedorDireccion"]);
+                              //$('#proveedorCorreo').val(rdata["proveedorCorreo"]);
+
+
+                              //$('#modalProveedor').modal("show");
+                              //$('#modal-title').html("Editar Proveedor");
+                              //$('#button-modal').attr('onclick', 'EditarProveedor()');
+                              //$('#button-modal').html("Editar Proveedor");
+                              //$('#proveedorId').val(rdata["proveedorId"]);
+                              //Metronic.unblockUI();
+
+
+
+                          });
+
+            }
+
+
+
+            function ingresarReservarHabitacion(idHabitacion) {
+
+                var empresaId = $('#empresaId').val();
+                var huespedId = $('#huespedId').val();
+                var habitacionId = idHabitacion;
+                //var habitacionNombre = "HABITACION " + $('#habitacionesSelect').val();
+                var habitacionValor = $('#servicioVtxt').val();
+
+                //alert(empresaId);
+                //alert(huespedId);
+                //alert(habitacionId);
+                //alert(habitacionNombre);
+                //alert(habitacionValor);
+                Metronic.blockUI({ message: '<div style="color:#BBB;"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i><br> cargando...</div>', boxed: true });
+                $.post('ingresarDetalleHabitacion',
+                    {
+                        empresaId: empresaId,
+                        huespedId: huespedId,
+                        habitacionId: habitacionId,
+                      //  habitacionNombre: habitacionNombre,
+                        habitacionValor: habitacionValor
+
+                    },
+                    function (rdata) {
+                        if (rdata["response"] === "success") {
+                            Metronic.unblockUI();
+                            swal({
+                                title: "Mantenedor de Habitaciones",
+                                text: "Habitacion Seleccionada",
+                                type: "success",
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "Continuar"
+                            }, function () {
+
+
+
+
+                                location.reload();
+                            });
+
+                        } else {
+                            Metronic.unblockUI();
+                            swal({
+                                title: "Mantenedor de Habitaciones",
+                                text: rdata["message"],
+                                type: "error",
+                                confirmButtonText: "Continuar"
+                            });
+                        }
+
+
+                    });
+
+
+            }
+
+
+            function obtenerInformacionReserva() {
+
+                var codigoReserva = $('#btnConsultaReserva').val();
+
+                Metronic.blockUI({ message: '<div style="color:#BBB;"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i><br> cargando...</div>', boxed: true });
+
+                $.post('obtenerServiciosPorCodigo',
+                          {
+                              codigoReserva: codigoReserva
+
+                          },
+                          function (rdata) {
+
+
+                        
+                              var servicio = "";
+                              switch (rdata["servicioId"]) {
+                                  case 1:
+                                      servicio = "Servicio 1";
+                                      // alert(servicio);
+                                      break
+                                  case 2:
+                                      servicio = "Servicio 2";
+                                      // alert(servicio);
+                                      break;
+
+                                  case 3:
+                                      servicio = "Servicio 3";
+                                      //alert(servicio);
+                                      break;
+                                  case 4:
+                                      servicio = "Servicio 4";
+                                      //alert(servicio);
+                                      break;
+                              }
+
+                              $('#nombreHuespedtxt').val(rdata["nombreHuesped"]);
+                              $('#apellidoHuespedtxt').val(rdata["apellidoHuesped"]);
+                              $('#correoHuesped').val(rdata["correoHuesped"]);
+                              $('#nombreEmpresatxt').val(rdata["nombreEmpresa"]);
+                              $('#serviciotxt').val(servicio);
+                              $('#huespedId').val(rdata["huespedId"]);
+                              $('#empresaId').val(rdata["empresaId"]);
+                              $('#servicioVtxt').val(rdata["detalleServicioValor"]);
+                              Metronic.unblockUI();
+
+                              //$('#modalHuesped').modal("show");
+                              //$('#modal-title').html("Editar Huesped");
+                              //$('#button-modal').attr('onclick', 'editarHuesped()');
+                              //$('#button-modal').html("Editar Huesped");
+                              //$('#huespedId').val(rdata["huespedId"]);
+                              //Metronic.unblockUI();
+
+
+
+
+                          });
+            }
+           
+
+
+            function liberarHabitacion(habitacionId, nombreHabitacion) {
+
+
+                swal({
+                    title: "Mantenedor de Habitaciones",
+                    text: 'Realmente desea Liberar  la Habitacion "' + nombreHabitacion + '"? ',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Continuar",
+                    cancelButtonText: "Cancelar",
+                    closeOnConfirm: false
+                }, function (isConfirm) {
+                    if (isConfirm) {
+                        Metronic.blockUI({ message: '<div style="color:#BBB;"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i><br> cargando...</div>', boxed: true });
+                        $.post('liberarHabitacion',
+                            {
+                                habitacionId: habitacionId
+
+                            },
+                            function (rdata) {
+                                if (rdata["response"] == "success") {
+                                    Metronic.unblockUI();
+                                    swal({
+                                        title: "Mantenedor de Habitaciones",
+                                        text: "Habitacion Liberada",
+                                        type: "success",
+                                        confirmButtonColor: "#DD6B55",
+                                        confirmButtonText: "Continuar",
+                                    }, function () {
+                                        location.reload();
+                                    });
+
+                                } else {
+                                    Metronic.unblockUI();
+                                    swal({
+                                        title: "Mantenedor de Habitaciones",
+                                        text: rdata["message"],
+                                        type: "error",
+                                        confirmButtonText: "Continuar"
+                                    });
+                                }
+
+
+                            });
+
+                    }
+                });
+            }
+            
+
+
+
+        </script>
+
+
+
+    }
+
+

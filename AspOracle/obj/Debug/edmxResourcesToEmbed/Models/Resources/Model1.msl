@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities1">
+    <EntitySetMapping Name="COMEDORES">
+      <EntityTypeMapping TypeName="Model.COMEDORES">
+        <MappingFragment StoreEntitySet="COMEDORES">
+          <ScalarProperty Name="ID_COMEDOR" ColumnName="ID_COMEDOR" />
+          <ScalarProperty Name="NOMBRE_COMEDOR" ColumnName="NOMBRE_COMEDOR" />
+          <ScalarProperty Name="CAPACIDAD_COMEDOR" ColumnName="CAPACIDAD_COMEDOR" />
+          <ScalarProperty Name="ESTADO_COMEDOR" ColumnName="ESTADO_COMEDOR" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DETALLE_COMEDORES">
+      <EntityTypeMapping TypeName="Model.DETALLE_COMEDORES">
+        <MappingFragment StoreEntitySet="DETALLE_COMEDORES">
+          <ScalarProperty Name="ESTADO_USADO" ColumnName="ESTADO_USADO" />
+          <ScalarProperty Name="ID_DETALLE_COMEDOR" ColumnName="ID_DETALLE_COMEDOR" />
+          <ScalarProperty Name="ID_COMEDOR" ColumnName="ID_COMEDOR" />
+          <ScalarProperty Name="ID_HUESPED" ColumnName="ID_HUESPED" />
+          <ScalarProperty Name="ID_EMPLEADO" ColumnName="ID_EMPLEADO" />
+          <ScalarProperty Name="ID_MENU" ColumnName="ID_MENU" />
+          <ScalarProperty Name="FECHA_SOLICITUD" ColumnName="FECHA_SOLICITUD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DETALLE_HABITACIONES">
+      <EntityTypeMapping TypeName="Model.DETALLE_HABITACIONES">
+        <MappingFragment StoreEntitySet="DETALLE_HABITACIONES">
+          <ScalarProperty Name="ID_DETALLE_HABITACION" ColumnName="ID_DETALLE_HABITACION" />
+          <ScalarProperty Name="ID_ESTADO_HABITACION" ColumnName="ID_ESTADO_HABITACION" />
+          <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+          <ScalarProperty Name="HUESPED_ID_HUESPED" ColumnName="HUESPED_ID_HUESPED" />
+          <ScalarProperty Name="HABITACION_ID_HABITACION" ColumnName="HABITACION_ID_HABITACION" />
+          <ScalarProperty Name="EMPLEADOS_ID_EMPLEADO" ColumnName="EMPLEADOS_ID_EMPLEADO" />
+          <ScalarProperty Name="FECHA_INGRESO" ColumnName="FECHA_INGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DETALLE_SERVICIO">
+      <EntityTypeMapping TypeName="Model.DETALLE_SERVICIO">
+        <MappingFragment StoreEntitySet="DETALLE_SERVICIO">
+          <ScalarProperty Name="FECHA_FIN_RES" ColumnName="FECHA_FIN_RES" />
+          <ScalarProperty Name="FECHA_INICIO_RES" ColumnName="FECHA_INICIO_RES" />
+          <ScalarProperty Name="ID_DETALLE_SERVICIO" ColumnName="ID_DETALLE_SERVICIO" />
+          <ScalarProperty Name="ID_SERVICO" ColumnName="ID_SERVICO" />
+          <ScalarProperty Name="ID_HUESPED" ColumnName="ID_HUESPED" />
+          <ScalarProperty Name="VALOR_SERVICIO" ColumnName="VALOR_SERVICIO" />
+          <ScalarProperty Name="CODIGO_SERVICIO" ColumnName="CODIGO_SERVICIO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EMPLEADOS">
+      <EntityTypeMapping TypeName="Model.EMPLEADOS">
+        <MappingFragment StoreEntitySet="EMPLEADOS">
+          <ScalarProperty Name="ID_EMPLEADO" ColumnName="ID_EMPLEADO" />
+          <ScalarProperty Name="NOMBRE_EMPLEADO" ColumnName="NOMBRE_EMPLEADO" />
+          <ScalarProperty Name="APELLIDO_EMPLEADO" ColumnName="APELLIDO_EMPLEADO" />
+          <ScalarProperty Name="TELEFONO_EMPLEADO" ColumnName="TELEFONO_EMPLEADO" />
+          <ScalarProperty Name="CORREO_EMPLEADO" ColumnName="CORREO_EMPLEADO" />
+          <ScalarProperty Name="EDAD_EMPLEADO" ColumnName="EDAD_EMPLEADO" />
+          <ScalarProperty Name="DIRECCION_EMPLEADO" ColumnName="DIRECCION_EMPLEADO" />
+          <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+          <ScalarProperty Name="PERFILES_USUARIOS_ID_PERFIL" ColumnName="PERFILES_USUARIOS_ID_PERFIL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EMPRESA">
+      <EntityTypeMapping TypeName="Model.EMPRESA">
+        <MappingFragment StoreEntitySet="EMPRESA">
+          <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
+          <ScalarProperty Name="RAZON_SOCIAL" ColumnName="RAZON_SOCIAL" />
+          <ScalarProperty Name="RUT_EMPRESA" ColumnName="RUT_EMPRESA" />
+          <ScalarProperty Name="DV_RUT_EMPRESA" ColumnName="DV_RUT_EMPRESA" />
+          <ScalarProperty Name="CORREO_EMPRESA" ColumnName="CORREO_EMPRESA" />
+          <ScalarProperty Name="DIRECCION_EMPRESA" ColumnName="DIRECCION_EMPRESA" />
+          <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+          <ScalarProperty Name="NOMBRE_REPRESENTANTE" ColumnName="NOMBRE_REPRESENTANTE" />
+          <ScalarProperty Name="APELLIDO_REPRESENTANTE" ColumnName="APELLIDO_REPRESENTANTE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ESTADO_HABITACION">
+      <EntityTypeMapping TypeName="Model.ESTADO_HABITACION">
+        <MappingFragment StoreEntitySet="ESTADO_HABITACION">
+          <ScalarProperty Name="ID_ESTADO_HABITACION" ColumnName="ID_ESTADO_HABITACION" />
+          <ScalarProperty Name="NOMBRE_ESTADO_HABITACION" ColumnName="NOMBRE_ESTADO_HABITACION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HABITACION">
+      <EntityTypeMapping TypeName="Model.HABITACION">
+        <MappingFragment StoreEntitySet="HABITACION">
+          <ScalarProperty Name="ID_HABITACION" ColumnName="ID_HABITACION" />
+          <ScalarProperty Name="NOMBRE_HABITACION" ColumnName="NOMBRE_HABITACION" />
+          <ScalarProperty Name="TIPO_CAMA_HABITACION" ColumnName="TIPO_CAMA_HABITACION" />
+          <ScalarProperty Name="ACCESORIOS_HABITACION" ColumnName="ACCESORIOS_HABITACION" />
+          <ScalarProperty Name="VALOR_HABITACION" ColumnName="VALOR_HABITACION" />
+          <ScalarProperty Name="E_ID_ESTADO_HABITACION" ColumnName="E_ID_ESTADO_HABITACION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HUESPED">
+      <EntityTypeMapping TypeName="Model.HUESPED">
+        <MappingFragment StoreEntitySet="HUESPED">
+          <ScalarProperty Name="ID_HUESPED" ColumnName="ID_HUESPED" />
+          <ScalarProperty Name="NOMBRE_HUESPED" ColumnName="NOMBRE_HUESPED" />
+          <ScalarProperty Name="APELLIDO_HUESPED" ColumnName="APELLIDO_HUESPED" />
+          <ScalarProperty Name="RUT_HUESPED" ColumnName="RUT_HUESPED" />
+          <ScalarProperty Name="DV_RUT_HUESPED" ColumnName="DV_RUT_HUESPED" />
+          <ScalarProperty Name="TELEFONO_HUESPED" ColumnName="TELEFONO_HUESPED" />
+          <ScalarProperty Name="CORREO_HUESPED" ColumnName="CORREO_HUESPED" />
+          <ScalarProperty Name="EMPRESA_ID_EMPRESA" ColumnName="EMPRESA_ID_EMPRESA" />
+          <ScalarProperty Name="ID_ESTADO_HUESPED" ColumnName="ID_ESTADO_HUESPED" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MENU">
+      <EntityTypeMapping TypeName="Model.MENU">
+        <MappingFragment StoreEntitySet="MENU">
+          <ScalarProperty Name="ID_MENU" ColumnName="ID_MENU" />
+          <ScalarProperty Name="NOMBRE_MENU" ColumnName="NOMBRE_MENU" />
+          <ScalarProperty Name="TIPO_MENU" ColumnName="TIPO_MENU" />
+          <ScalarProperty Name="ESTILO_MENU" ColumnName="ESTILO_MENU" />
+          <ScalarProperty Name="DESCRIPCION_MENU" ColumnName="DESCRIPCION_MENU" />
+          <ScalarProperty Name="VALOR_MENU" ColumnName="VALOR_MENU" />
+          <ScalarProperty Name="CANTIDAD_MENU" ColumnName="CANTIDAD_MENU" />
+          <ScalarProperty Name="ESTADO_MENU" ColumnName="ESTADO_MENU" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PERFILES_USUARIOS">
+      <EntityTypeMapping TypeName="Model.PERFILES_USUARIOS">
+        <MappingFragment StoreEntitySet="PERFILES_USUARIOS">
+          <ScalarProperty Name="ID_PERFIL" ColumnName="ID_PERFIL" />
+          <ScalarProperty Name="NOMBRE_PERFIL" ColumnName="NOMBRE_PERFIL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PROVEEDOR">
+      <EntityTypeMapping TypeName="Model.PROVEEDOR">
+        <MappingFragment StoreEntitySet="PROVEEDOR">
+          <ScalarProperty Name="ID_PROVEEDOR" ColumnName="ID_PROVEEDOR" />
+          <ScalarProperty Name="NOMBRE_PROVEEDOR" ColumnName="NOMBRE_PROVEEDOR" />
+          <ScalarProperty Name="CONTACTO_PROVEEDOR" ColumnName="CONTACTO_PROVEEDOR" />
+          <ScalarProperty Name="RUBRO_PROVEEDOR" ColumnName="RUBRO_PROVEEDOR" />
+          <ScalarProperty Name="DIRECCION_PROVEEDOR" ColumnName="DIRECCION_PROVEEDOR" />
+          <ScalarProperty Name="CORREO_PROVEEDOR" ColumnName="CORREO_PROVEEDOR" />
+          <ScalarProperty Name="PERFILES_USUARIOS_ID_PERFIL" ColumnName="PERFILES_USUARIOS_ID_PERFIL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USUARIOS">
+      <EntityTypeMapping TypeName="Model.USUARIOS">
+        <MappingFragment StoreEntitySet="USUARIOS">
+          <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+          <ScalarProperty Name="NOMBRE_USUARIO" ColumnName="NOMBRE_USUARIO" />
+          <ScalarProperty Name="APELLIDO_USUARIO" ColumnName="APELLIDO_USUARIO" />
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="ESTADO_PASSWORD" ColumnName="ESTADO_PASSWORD" />
+          <ScalarProperty Name="ID_PERFIL" ColumnName="ID_PERFIL" />
+          <ScalarProperty Name="EMPRESA_ID_EMPRESA" ColumnName="EMPRESA_ID_EMPRESA" />
+          <ScalarProperty Name="PERFILES_USUARIOS_ID_PERFIL" ColumnName="PERFILES_USUARIOS_ID_PERFIL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ACTUALIZAR_COMEDOR" FunctionName="Model.Store.ACTUALIZAR_COMEDOR" />
+    <FunctionImportMapping FunctionImportName="ACTUALIZAR_EMPLEADO" FunctionName="Model.Store.ACTUALIZAR_EMPLEADO" />
+    <FunctionImportMapping FunctionImportName="ACTUALIZAR_EMPRESA" FunctionName="Model.Store.ACTUALIZAR_EMPRESA" />
+    <FunctionImportMapping FunctionImportName="ACTUALIZAR_HABITACION" FunctionName="Model.Store.ACTUALIZAR_HABITACION" />
+    <FunctionImportMapping FunctionImportName="ACTUALIZAR_HUESPED" FunctionName="Model.Store.ACTUALIZAR_HUESPED" />
+    <FunctionImportMapping FunctionImportName="ACTUALIZAR_MENU" FunctionName="Model.Store.ACTUALIZAR_MENU" />
+    <FunctionImportMapping FunctionImportName="ACTUALIZAR_PROVEEDOR" FunctionName="Model.Store.ACTUALIZAR_PROVEEDOR" />
+    <FunctionImportMapping FunctionImportName="ELIMINAR_COMEDOR" FunctionName="Model.Store.ELIMINAR_COMEDOR" />
+    <FunctionImportMapping FunctionImportName="ELIMINAR_EMPLEADO" FunctionName="Model.Store.ELIMINAR_EMPLEADO" />
+    <FunctionImportMapping FunctionImportName="ELIMINAR_EMPRESA" FunctionName="Model.Store.ELIMINAR_EMPRESA" />
+    <FunctionImportMapping FunctionImportName="ELIMINAR_HABITACION" FunctionName="Model.Store.ELIMINAR_HABITACION" />
+    <FunctionImportMapping FunctionImportName="ELIMINAR_HUESPED" FunctionName="Model.Store.ELIMINAR_HUESPED" />
+    <FunctionImportMapping FunctionImportName="ELIMINAR_MENU" FunctionName="Model.Store.ELIMINAR_MENU" />
+    <FunctionImportMapping FunctionImportName="ELIMINAR_PROVEEDOR" FunctionName="Model.Store.ELIMINAR_PROVEEDOR" />
+    <FunctionImportMapping FunctionImportName="INSERTAR_COMEDOR" FunctionName="Model.Store.INSERTAR_COMEDOR" />
+    <FunctionImportMapping FunctionImportName="INSERTAR_DETALLE_COMEDOR" FunctionName="Model.Store.INSERTAR_DETALLE_COMEDOR" />
+    <FunctionImportMapping FunctionImportName="INSERTAR_DETALLE_HABITACION" FunctionName="Model.Store.INSERTAR_DETALLE_HABITACION" />
+    <FunctionImportMapping FunctionImportName="INSERTAR_DETALLE_SERVICIO" FunctionName="Model.Store.INSERTAR_DETALLE_SERVICIO" />
+    <FunctionImportMapping FunctionImportName="INSERTAR_EMPLEADOS" FunctionName="Model.Store.INSERTAR_EMPLEADOS" />
+    <FunctionImportMapping FunctionImportName="INSERTAR_EMPRESA" FunctionName="Model.Store.INSERTAR_EMPRESA" />
+    <FunctionImportMapping FunctionImportName="INSERTAR_HABITACION" FunctionName="Model.Store.INSERTAR_HABITACION" />
+    <FunctionImportMapping FunctionImportName="INSERTAR_HUESPED" FunctionName="Model.Store.INSERTAR_HUESPED" />
+    <FunctionImportMapping FunctionImportName="INSERTAR_MENU" FunctionName="Model.Store.INSERTAR_MENU" />
+    <FunctionImportMapping FunctionImportName="INSERTAR_PROVEEDOR" FunctionName="Model.Store.INSERTAR_PROVEEDOR" />
+    <FunctionImportMapping FunctionImportName="INSERTAR_USUARIO" FunctionName="Model.Store.INSERTAR_USUARIO" />
+    <FunctionImportMapping FunctionImportName="LIBERAR_COMEDOR" FunctionName="Model.Store.LIBERAR_COMEDOR" />
+    <FunctionImportMapping FunctionImportName="LIBERAR_HABITACION" FunctionName="Model.Store.LIBERAR_HABITACION" />
+    <EntitySetMapping Name="PRODUCTO">
+      <EntityTypeMapping TypeName="Model.PRODUCTO">
+        <MappingFragment StoreEntitySet="PRODUCTO">
+          <ScalarProperty Name="ESTADO_PRODUCTO" ColumnName="ESTADO_PRODUCTO" />
+          <ScalarProperty Name="ID_PROVEEDOR" ColumnName="ID_PROVEEDOR" />
+          <ScalarProperty Name="STOCK_PRODUCTO" ColumnName="STOCK_PRODUCTO" />
+          <ScalarProperty Name="NOMBRE_PRODUCTO" ColumnName="NOMBRE_PRODUCTO" />
+          <ScalarProperty Name="ID_PRODUCTO" ColumnName="ID_PRODUCTO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="INSERTAR_PRODUCTO" FunctionName="Model.Store.INSERTAR_PRODUCTO" />
+    <EntitySetMapping Name="ORDEN_PEDIDO">
+      <EntityTypeMapping TypeName="Model.ORDEN_PEDIDO">
+        <MappingFragment StoreEntitySet="ORDEN_PEDIDO">
+          <ScalarProperty Name="CODIGO_ORDEN_PEDIDO" ColumnName="CODIGO_ORDEN_PEDIDO" />
+          <ScalarProperty Name="CANTIDAD_PRODUCTO" ColumnName="CANTIDAD_PRODUCTO" />
+          <ScalarProperty Name="PRODUCTOS_CODIGOS" ColumnName="PRODUCTOS_CODIGOS" />
+          <ScalarProperty Name="ID_PROVEEDOR" ColumnName="ID_PROVEEDOR" />
+          <ScalarProperty Name="ID_ORDEN_PEDIDO" ColumnName="ID_ORDEN_PEDIDO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="INSERTAR_ORDEN_PEDIDO" FunctionName="Model.Store.INSERTAR_ORDEN_PEDIDO" />
+  </EntityContainerMapping>
+</Mapping>

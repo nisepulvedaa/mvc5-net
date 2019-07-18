@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "TimeLine";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<h2>TimeLine</h2>
+<br />
+<br />
+
+
+			<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        <ul class="timeline">
+
+            @Html.Raw(ViewBag.TimeLine)
+
+            
+
+        
+        </ul>
+    </div>
+</div>
+
+
+@section styles{
+
+
+
+<link href="~/Metronic/assets/admin/pages/css/timeline-old.css" rel="stylesheet" />
+}
+
+
+
+
+
+

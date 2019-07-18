@@ -1,0 +1,621 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="COMEDORES">
+    <Key>
+      <PropertyRef Name="ID_COMEDOR" />
+    </Key>
+    <Property Name="ID_COMEDOR" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="NOMBRE_COMEDOR" Type="varchar2" MaxLength="250" />
+    <Property Name="CAPACIDAD_COMEDOR" Type="number" Precision="10" Scale="0" />
+    <Property Name="ESTADO_COMEDOR" Type="number" Precision="10" Scale="0" />
+  </EntityType>
+  <EntityType Name="DETALLE_COMEDORES">
+    <Key>
+      <PropertyRef Name="ID_DETALLE_COMEDOR" />
+    </Key>
+    <Property Name="ID_DETALLE_COMEDOR" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="ID_COMEDOR" Type="number" Precision="10" Scale="0" />
+    <Property Name="ID_HUESPED" Type="number" Precision="10" Scale="0" />
+    <Property Name="ID_EMPLEADO" Type="number" Precision="10" Scale="0" />
+    <Property Name="ID_MENU" Type="number" Precision="10" Scale="0" />
+    <Property Name="FECHA_SOLICITUD" Type="timestamp" Precision="6" />
+    <Property Name="ESTADO_USADO" Type="number" Precision="38" Scale="0" />
+  </EntityType>
+  <EntityType Name="DETALLE_HABITACIONES">
+    <Key>
+      <PropertyRef Name="ID_DETALLE_HABITACION" />
+    </Key>
+    <Property Name="ID_DETALLE_HABITACION" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="ID_ESTADO_HABITACION" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="VALOR" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="HUESPED_ID_HUESPED" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="HABITACION_ID_HABITACION" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="EMPLEADOS_ID_EMPLEADO" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="FECHA_INGRESO" Type="timestamp" Precision="6" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DETALLE_SERVICIO">
+    <Key>
+      <PropertyRef Name="ID_DETALLE_SERVICIO" />
+    </Key>
+    <Property Name="ID_DETALLE_SERVICIO" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="ID_SERVICO" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="ID_HUESPED" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="VALOR_SERVICIO" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="CODIGO_SERVICIO" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="FECHA_INICIO_RES" Type="date" />
+    <Property Name="FECHA_FIN_RES" Type="date" />
+  </EntityType>
+  <EntityType Name="EMPLEADOS">
+    <Key>
+      <PropertyRef Name="ID_EMPLEADO" />
+    </Key>
+    <Property Name="ID_EMPLEADO" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="NOMBRE_EMPLEADO" Type="varchar2" MaxLength="250" />
+    <Property Name="APELLIDO_EMPLEADO" Type="varchar2" MaxLength="250" />
+    <Property Name="TELEFONO_EMPLEADO" Type="number" Precision="10" Scale="0" />
+    <Property Name="CORREO_EMPLEADO" Type="varchar2" MaxLength="250" />
+    <Property Name="EDAD_EMPLEADO" Type="number" Precision="10" Scale="0" />
+    <Property Name="DIRECCION_EMPLEADO" Type="varchar2" MaxLength="250" />
+    <Property Name="ID_USUARIO" Type="number" Precision="10" Scale="0" />
+    <Property Name="PERFILES_USUARIOS_ID_PERFIL" Type="number" Precision="10" Scale="0" />
+  </EntityType>
+  <EntityType Name="EMPRESA">
+    <Key>
+      <PropertyRef Name="ID_EMPRESA" />
+    </Key>
+    <Property Name="ID_EMPRESA" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="RAZON_SOCIAL" Type="varchar2" MaxLength="250" />
+    <Property Name="RUT_EMPRESA" Type="varchar2" MaxLength="250" />
+    <Property Name="DV_RUT_EMPRESA" Type="char" MaxLength="1" />
+    <Property Name="CORREO_EMPRESA" Type="varchar2" MaxLength="250" />
+    <Property Name="DIRECCION_EMPRESA" Type="varchar2" MaxLength="500" />
+    <Property Name="TELEFONO" Type="number" Precision="10" Scale="0" />
+    <Property Name="NOMBRE_REPRESENTANTE" Type="varchar2" MaxLength="250" />
+    <Property Name="APELLIDO_REPRESENTANTE" Type="varchar2" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="ESTADO_HABITACION">
+    <Key>
+      <PropertyRef Name="ID_ESTADO_HABITACION" />
+    </Key>
+    <Property Name="ID_ESTADO_HABITACION" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="NOMBRE_ESTADO_HABITACION" Type="varchar2" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="HABITACION">
+    <Key>
+      <PropertyRef Name="ID_HABITACION" />
+    </Key>
+    <Property Name="ID_HABITACION" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="NOMBRE_HABITACION" Type="varchar2" MaxLength="250" />
+    <Property Name="TIPO_CAMA_HABITACION" Type="varchar2" MaxLength="250" />
+    <Property Name="ACCESORIOS_HABITACION" Type="varchar2" MaxLength="500" />
+    <Property Name="VALOR_HABITACION" Type="number" Precision="10" Scale="0" />
+    <Property Name="E_ID_ESTADO_HABITACION" Type="number" Precision="10" Scale="0" />
+  </EntityType>
+  <EntityType Name="HUESPED">
+    <Key>
+      <PropertyRef Name="ID_HUESPED" />
+    </Key>
+    <Property Name="ID_HUESPED" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="NOMBRE_HUESPED" Type="varchar2" MaxLength="250" />
+    <Property Name="APELLIDO_HUESPED" Type="varchar2" MaxLength="250" />
+    <Property Name="RUT_HUESPED" Type="number" Precision="8" Scale="0" />
+    <Property Name="DV_RUT_HUESPED" Type="char" MaxLength="1" />
+    <Property Name="TELEFONO_HUESPED" Type="number" Precision="10" Scale="0" />
+    <Property Name="CORREO_HUESPED" Type="varchar2" MaxLength="250" />
+    <Property Name="EMPRESA_ID_EMPRESA" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="ID_ESTADO_HUESPED" Type="number" Precision="10" Scale="0" />
+  </EntityType>
+  <EntityType Name="MENU">
+    <Key>
+      <PropertyRef Name="ID_MENU" />
+    </Key>
+    <Property Name="ID_MENU" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="NOMBRE_MENU" Type="varchar2" MaxLength="250" />
+    <Property Name="TIPO_MENU" Type="number" Precision="10" Scale="0" />
+    <Property Name="ESTILO_MENU" Type="number" Precision="10" Scale="0" />
+    <Property Name="DESCRIPCION_MENU" Type="varchar2" MaxLength="250" />
+    <Property Name="VALOR_MENU" Type="number" Precision="10" Scale="0" />
+    <Property Name="CANTIDAD_MENU" Type="number" Precision="10" Scale="0" />
+    <Property Name="ESTADO_MENU" Type="number" Precision="10" Scale="0" />
+  </EntityType>
+  <EntityType Name="ORDEN_PEDIDO">
+    <Key>
+      <PropertyRef Name="ID_ORDEN_PEDIDO" />
+    </Key>
+    <Property Name="ID_ORDEN_PEDIDO" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="ID_PROVEEDOR" Type="number" Precision="10" Scale="0" />
+    <Property Name="PRODUCTOS_CODIGOS" Type="varchar2" MaxLength="250" />
+    <Property Name="CANTIDAD_PRODUCTO" Type="number" Precision="10" Scale="0" />
+    <Property Name="CODIGO_ORDEN_PEDIDO" Type="number" Precision="10" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PERFILES_USUARIOS">
+    <Key>
+      <PropertyRef Name="ID_PERFIL" />
+    </Key>
+    <Property Name="ID_PERFIL" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="NOMBRE_PERFIL" Type="varchar2" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="PRODUCTO">
+    <Key>
+      <PropertyRef Name="ID_PRODUCTO" />
+    </Key>
+    <Property Name="ID_PRODUCTO" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="NOMBRE_PRODUCTO" Type="varchar2" MaxLength="250" />
+    <Property Name="STOCK_PRODUCTO" Type="number" Precision="10" Scale="0" />
+    <Property Name="ID_PROVEEDOR" Type="number" Precision="10" Scale="0" />
+    <Property Name="ESTADO_PRODUCTO" Type="number" Precision="10" Scale="0" />
+  </EntityType>
+  <EntityType Name="PROVEEDOR">
+    <Key>
+      <PropertyRef Name="ID_PROVEEDOR" />
+    </Key>
+    <Property Name="ID_PROVEEDOR" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="NOMBRE_PROVEEDOR" Type="varchar2" MaxLength="250" />
+    <Property Name="CONTACTO_PROVEEDOR" Type="number" Precision="10" Scale="0" />
+    <Property Name="RUBRO_PROVEEDOR" Type="varchar2" MaxLength="250" />
+    <Property Name="DIRECCION_PROVEEDOR" Type="varchar2" MaxLength="250" />
+    <Property Name="CORREO_PROVEEDOR" Type="varchar2" MaxLength="250" />
+    <Property Name="PERFILES_USUARIOS_ID_PERFIL" Type="number" Precision="10" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="USUARIOS">
+    <Key>
+      <PropertyRef Name="ID_USUARIO" />
+    </Key>
+    <Property Name="ID_USUARIO" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="NOMBRE_USUARIO" Type="varchar2" MaxLength="250" />
+    <Property Name="APELLIDO_USUARIO" Type="varchar2" MaxLength="250" />
+    <Property Name="USERNAME" Type="varchar2" MaxLength="250" />
+    <Property Name="PASSWORD" Type="varchar2" MaxLength="250" />
+    <Property Name="ESTADO_PASSWORD" Type="varchar2" MaxLength="250" />
+    <Property Name="ID_PERFIL" Type="number" Precision="10" Scale="0" />
+    <Property Name="EMPRESA_ID_EMPRESA" Type="number" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="PERFILES_USUARIOS_ID_PERFIL" Type="number" Precision="10" Scale="0" Nullable="false" />
+  </EntityType>
+  <Association Name="DHES_FK">
+    <End Role="EMPLEADOS" Type="Self.EMPLEADOS" Multiplicity="1" />
+    <End Role="DETALLE_HABITACIONES" Type="Self.DETALLE_HABITACIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPLEADOS">
+        <PropertyRef Name="ID_EMPLEADO" />
+      </Principal>
+      <Dependent Role="DETALLE_HABITACIONES">
+        <PropertyRef Name="EMPLEADOS_ID_EMPLEADO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DHHA_FK">
+    <End Role="HABITACION" Type="Self.HABITACION" Multiplicity="1" />
+    <End Role="DETALLE_HABITACIONES" Type="Self.DETALLE_HABITACIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HABITACION">
+        <PropertyRef Name="ID_HABITACION" />
+      </Principal>
+      <Dependent Role="DETALLE_HABITACIONES">
+        <PropertyRef Name="HABITACION_ID_HABITACION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DHHU_FK">
+    <End Role="HUESPED" Type="Self.HUESPED" Multiplicity="1" />
+    <End Role="DETALLE_HABITACIONES" Type="Self.DETALLE_HABITACIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HUESPED">
+        <PropertyRef Name="ID_HUESPED" />
+      </Principal>
+      <Dependent Role="DETALLE_HABITACIONES">
+        <PropertyRef Name="HUESPED_ID_HUESPED" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DTC_FK">
+    <End Role="COMEDORES" Type="Self.COMEDORES" Multiplicity="0..1" />
+    <End Role="DETALLE_COMEDORES" Type="Self.DETALLE_COMEDORES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COMEDORES">
+        <PropertyRef Name="ID_COMEDOR" />
+      </Principal>
+      <Dependent Role="DETALLE_COMEDORES">
+        <PropertyRef Name="ID_COMEDOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DTE_FK">
+    <End Role="EMPLEADOS" Type="Self.EMPLEADOS" Multiplicity="0..1" />
+    <End Role="DETALLE_COMEDORES" Type="Self.DETALLE_COMEDORES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPLEADOS">
+        <PropertyRef Name="ID_EMPLEADO" />
+      </Principal>
+      <Dependent Role="DETALLE_COMEDORES">
+        <PropertyRef Name="ID_EMPLEADO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DTH_FK">
+    <End Role="HUESPED" Type="Self.HUESPED" Multiplicity="0..1" />
+    <End Role="DETALLE_COMEDORES" Type="Self.DETALLE_COMEDORES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HUESPED">
+        <PropertyRef Name="ID_HUESPED" />
+      </Principal>
+      <Dependent Role="DETALLE_COMEDORES">
+        <PropertyRef Name="ID_HUESPED" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DTM_FK">
+    <End Role="MENU" Type="Self.MENU" Multiplicity="0..1" />
+    <End Role="DETALLE_COMEDORES" Type="Self.DETALLE_COMEDORES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MENU">
+        <PropertyRef Name="ID_MENU" />
+      </Principal>
+      <Dependent Role="DETALLE_COMEDORES">
+        <PropertyRef Name="ID_MENU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EPU_FK">
+    <End Role="PERFILES_USUARIOS" Type="Self.PERFILES_USUARIOS" Multiplicity="0..1" />
+    <End Role="EMPLEADOS" Type="Self.EMPLEADOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PERFILES_USUARIOS">
+        <PropertyRef Name="ID_PERFIL" />
+      </Principal>
+      <Dependent Role="EMPLEADOS">
+        <PropertyRef Name="PERFILES_USUARIOS_ID_PERFIL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="HEH_FK">
+    <End Role="ESTADO_HABITACION" Type="Self.ESTADO_HABITACION" Multiplicity="0..1" />
+    <End Role="HABITACION" Type="Self.HABITACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTADO_HABITACION">
+        <PropertyRef Name="ID_ESTADO_HABITACION" />
+      </Principal>
+      <Dependent Role="HABITACION">
+        <PropertyRef Name="E_ID_ESTADO_HABITACION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="HUESPED_EMPRESA_FK">
+    <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="1" />
+    <End Role="HUESPED" Type="Self.HUESPED" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPRESA">
+        <PropertyRef Name="ID_EMPRESA" />
+      </Principal>
+      <Dependent Role="HUESPED">
+        <PropertyRef Name="EMPRESA_ID_EMPRESA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ORP_FK">
+    <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="0..1" />
+    <End Role="ORDEN_PEDIDO" Type="Self.ORDEN_PEDIDO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROVEEDOR">
+        <PropertyRef Name="ID_PROVEEDOR" />
+      </Principal>
+      <Dependent Role="ORDEN_PEDIDO">
+        <PropertyRef Name="ID_PROVEEDOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PP_FK">
+    <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="0..1" />
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROVEEDOR">
+        <PropertyRef Name="ID_PROVEEDOR" />
+      </Principal>
+      <Dependent Role="PRODUCTO">
+        <PropertyRef Name="ID_PROVEEDOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PPU_FK">
+    <End Role="PERFILES_USUARIOS" Type="Self.PERFILES_USUARIOS" Multiplicity="1" />
+    <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PERFILES_USUARIOS">
+        <PropertyRef Name="ID_PERFIL" />
+      </Principal>
+      <Dependent Role="PROVEEDOR">
+        <PropertyRef Name="PERFILES_USUARIOS_ID_PERFIL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UPU_FK">
+    <End Role="PERFILES_USUARIOS" Type="Self.PERFILES_USUARIOS" Multiplicity="1" />
+    <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PERFILES_USUARIOS">
+        <PropertyRef Name="ID_PERFIL" />
+      </Principal>
+      <Dependent Role="USUARIOS">
+        <PropertyRef Name="PERFILES_USUARIOS_ID_PERFIL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="USUARIOS_EMPRESA_FK">
+    <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="1" />
+    <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPRESA">
+        <PropertyRef Name="ID_EMPRESA" />
+      </Principal>
+      <Dependent Role="USUARIOS">
+        <PropertyRef Name="EMPRESA_ID_EMPRESA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="ACTUALIZAR_COMEDOR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="HR">
+    <Parameter Name="P_ID_COMEDOR" Type="number" Mode="In" />
+    <Parameter Name="P_NOMBRE_COMEDOR" Type="varchar2" Mode="In" />
+    <Parameter Name="P_CAPACIDAD_COMEDOR" Type="number" Mode="In" />
+    <Parameter Name="P_ESTADO_COMEDOR" Type="number" Mode="In" />
+  </Function>
+  <Function Name="ACTUALIZAR_EMPLEADO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="HR">
+    <Parameter Name="P_ID_EMPLEADO" Type="number" Mode="In" />
+    <Parameter Name="P_NOMBRE_EMPLEADO" Type="varchar2" Mode="In" />
+    <Parameter Name="P_APELLIDO_AMPLEADO" Type="varchar2" Mode="In" />
+    <Parameter Name="P_TELEFONO_EMPLEADO" Type="number" Mode="In" />
+    <Parameter Name="P_CORREO_EMPLEADO" Type="varchar2" Mode="In" />
+    <Parameter Name="P_EDAD_EMPLEADO" Type="number" Mode="In" />
+    <Parameter Name="P_DIRECCION_EMPLEADO" Type="varchar2" Mode="In" />
+  </Function>
+  <Function Name="ACTUALIZAR_EMPRESA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="HR">
+    <Parameter Name="P_EMPRESAID" Type="number" Mode="In" />
+    <Parameter Name="P_RAZON_SOCIAL" Type="varchar2" Mode="In" />
+    <Parameter Name="P_RUT_EMPRESA" Type="varchar2" Mode="In" />
+    <Parameter Name="P_DV_RUT_EMPRESA" Type="char" Mode="In" />
+    <Parameter Name="P_CORREO" Type="varchar2" Mode="In" />
+    <Parameter Name="P_DIRECCION" Type="varchar2" Mode="In" />
+    <Parameter Name="P_TELEFONO" Type="number" Mode="In" />
+    <Parameter Name="P_NOMBREREP" Type="varchar2" Mode="In" />
+    <Parameter Name="P_APELLIDOREP" Type="varchar2" Mode="In" />
+  </Function>
+  <Function Name="ACTUALIZAR_HABITACION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="HR">
+    <Parameter Name="P_ID_HABITACION" Type="number" Mode="In" />
+    <Parameter Name="P_NOMBRE_HABITACION" Type="varchar2" Mode="In" />
+    <Parameter Name="P_TIPO_CAMA_HABITACION" Type="varchar2" Mode="In" />
+    <Parameter Name="P_ACCESORIOS_HABITACION" Type="varchar2" Mode="In" />
+    <Parameter Name="P_VALOR_HABITACION" Type="number" Mode="In" />
+    <Parameter Name="P_ID_ESTADO_H" Type="number" Mode="In" />
+  </Function>
+  <Function Name="ACTUALIZAR_HUESPED" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="HR">
+    <Parameter Name="P_ID_HUESPUED" Type="number" Mode="In" />
+    <Parameter Name="P_NOMBRE_HUESPED" Type="varchar2" Mode="In" />
+    <Parameter Name="P_APELLIDO_HUESPED" Type="varchar2" Mode="In" />
+    <Parameter Name="P_RUT_HUESPED" Type="number" Mode="In" />
+    <Parameter Name="P_DV_RUT_HUESPED" Type="char" Mode="In" />
+    <Parameter Name="P_TELEFONO" Type="number" Mode="In" />
+    <Parameter Name="P_CORREO" Type="varchar2" Mode="In" />
+    <Parameter Name="P_EMPRESA_ID" Type="number" Mode="In" />
+  </Function>
+  <Function Name="ACTUALIZAR_MENU" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="HR">
+    <Parameter Name="P_ID_MENU" Type="number" Mode="In" />
+    <Parameter Name="P_NOMBRE_MENU" Type="varchar2" Mode="In" />
+    <Parameter Name="P_TIPO_MENU" Type="number" Mode="In" />
+    <Parameter Name="P_ESTILO_MENU" Type="number" Mode="In" />
+    <Parameter Name="P_DESCRIPCION_MENU" Type="varchar2" Mode="In" />
+    <Parameter Name="P_VALOR_MENU" Type="number" Mode="In" />
+    <Parameter Name="P_CANTIDAD_MENU" Type="number" Mode="In" />
+    <Parameter Name="P_ESTADO_MENU" Type="number" Mode="In" />
+  </Function>
+  <Function Name="ACTUALIZAR_PROVEEDOR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="HR">
+    <Parameter Name="P_ID_PROVEEDOR" Type="number" Mode="In" />
+    <Parameter Name="P_NOMBRE_PROVEEDOR" Type="varchar2" Mode="In" />
+    <Parameter Name="P_CONTACTO_PROVEEDOR" Type="number" Mode="In" />
+    <Parameter Name="P_RUBRO_PROVEEDOR" Type="varchar2" Mode="In" />
+    <Parameter Name="P_DIRECCION_PROVEEDOR" Type="varchar2" Mode="In" />
+    <Parameter Name="P_CORREO_PROVEEDOR" Type="varchar2" Mode="In" />
+  </Function>
+  <Function Name="ELIMINAR_COMEDOR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="HR">
+    <Parameter Name="P_COMEDORID" Type="number" Mode="In" />
+  </Function>
+  <Function Name="ELIMINAR_EMPLEADO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="HR">
+    <Parameter Name="EMPLEADOID" Type="number" Mode="In" />
+  </Function>
+  <Function Name="ELIMINAR_EMPRESA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="HR">
+    <Parameter Name="EMPRESAID" Type="number" Mode="In" />
+  </Function>
+  <Function Name="ELIMINAR_HABITACION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="HR">
+    <Parameter Name="P_HABITACIONID" Type="number" Mode="In" />
+  </Function>
+  <Function Name="ELIMINAR_HUESPED" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="HR">
+    <Parameter Name="HUESPEDID" Type="number" Mode="In" />
+  </Function>
+  <Function Name="ELIMINAR_MENU" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="HR">
+    <Parameter Name="P_MENUID" Type="number" Mode="In" />
+  </Function>
+  <Function Name="ELIMINAR_PROVEEDOR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="HR">
+    <Parameter Name="PROVEEDORID" Type="number" Mode="In" />
+  </Function>
+  <Function Name="INSERTAR_COMEDOR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="HR">
+    <Parameter Name="P_NOMBRE_COMEDOR" Type="varchar2" Mode="In" />
+    <Parameter Name="P_CAPACIDAD_COMEDOR" Type="number" Mode="In" />
+    <Parameter Name="P_ESTADO_COMEDOR" Type="number" Mode="In" />
+  </Function>
+  <Function Name="INSERTAR_DETALLE_COMEDOR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="HR">
+    <Parameter Name="P_ID_COMEDOR" Type="number" Mode="In" />
+    <Parameter Name="P_ID_HUESPED" Type="number" Mode="In" />
+    <Parameter Name="P_ID_EMPLEADO" Type="number" Mode="In" />
+    <Parameter Name="P_ID_MENU" Type="number" Mode="In" />
+  </Function>
+  <Function Name="INSERTAR_DETALLE_HABITACION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="HR">
+    <Parameter Name="P_ID_ESTADO_HABITACION" Type="number" Mode="In" />
+    <Parameter Name="P_VALOR" Type="number" Mode="In" />
+    <Parameter Name="P_HUESPED_ID_HUESPED" Type="number" Mode="In" />
+    <Parameter Name="P_HABITACION_ID_HABITACION" Type="number" Mode="In" />
+    <Parameter Name="P_EMPLEADOS_ID_EMPLEADO" Type="number" Mode="In" />
+  </Function>
+  <Function Name="INSERTAR_DETALLE_SERVICIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="HR">
+    <Parameter Name="P_ID_SERVICIO" Type="number" Mode="In" />
+    <Parameter Name="P_ID_HUESPED" Type="number" Mode="In" />
+    <Parameter Name="P_VALOR_SERVICIO" Type="number" Mode="In" />
+    <Parameter Name="P_CODIGO_RESERVA" Type="number" Mode="In" />
+    <Parameter Name="P_FECHA_INICIO" Type="timestamp" Mode="In" />
+    <Parameter Name="P_FECHA_FIN" Type="timestamp" Mode="In" />
+  </Function>
+  <Function Name="INSERTAR_EMPLEADOS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="HR">
+    <Parameter Name="NOMBRE_EMPLEADO" Type="varchar2" Mode="In" />
+    <Parameter Name="APELLIDO_EMPLEADO" Type="varchar2" Mode="In" />
+    <Parameter Name="TELEFONO_EMPLEADO" Type="number" Mode="In" />
+    <Parameter Name="CORREO_EMPLEADO" Type="varchar2" Mode="In" />
+    <Parameter Name="EDAD_EMPLEADO" Type="number" Mode="In" />
+    <Parameter Name="DIRECCION_EMPELADO" Type="varchar2" Mode="In" />
+    <Parameter Name="ID_USUARIO" Type="number" Mode="In" />
+    <Parameter Name="ID_PERFIL" Type="number" Mode="In" />
+  </Function>
+  <Function Name="INSERTAR_EMPRESA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="HR">
+    <Parameter Name="RAZON_SOCIAL" Type="varchar2" Mode="In" />
+    <Parameter Name="RUT_EMPRESA" Type="varchar2" Mode="In" />
+    <Parameter Name="DV_RUT_EMPRESA" Type="char" Mode="In" />
+    <Parameter Name="CORREO" Type="varchar2" Mode="In" />
+    <Parameter Name="DIRECCION" Type="varchar2" Mode="In" />
+    <Parameter Name="TELEFONO" Type="number" Mode="In" />
+    <Parameter Name="NOMBREREP" Type="varchar2" Mode="In" />
+    <Parameter Name="APELLIDOREP" Type="varchar2" Mode="In" />
+  </Function>
+  <Function Name="INSERTAR_HABITACION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="HR">
+    <Parameter Name="P_NOMBRE_HABITACION" Type="varchar2" Mode="In" />
+    <Parameter Name="P_TIPO_CAMA_HABITACION" Type="varchar2" Mode="In" />
+    <Parameter Name="P_ACCESORIOS_HABITACION" Type="varchar2" Mode="In" />
+    <Parameter Name="P_VALOR_HABITACION" Type="number" Mode="In" />
+    <Parameter Name="P_ESTADO_HABITACION" Type="number" Mode="In" />
+  </Function>
+  <Function Name="INSERTAR_HUESPED" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="HR">
+    <Parameter Name="P_NOMBRE_HUESPED" Type="varchar2" Mode="In" />
+    <Parameter Name="P_APELLIDO_HUESPED" Type="varchar2" Mode="In" />
+    <Parameter Name="P_RUT_HUESPED" Type="number" Mode="In" />
+    <Parameter Name="P_DV_RUT_HUESPED" Type="char" Mode="In" />
+    <Parameter Name="P_TELEFONO_HUESPED" Type="number" Mode="In" />
+    <Parameter Name="P_CORREO_HUESPED" Type="varchar2" Mode="In" />
+    <Parameter Name="P_ID_EMPRESA" Type="number" Mode="In" />
+  </Function>
+  <Function Name="INSERTAR_MENU" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="HR">
+    <Parameter Name="P_NOMBRE_MENU" Type="varchar2" Mode="In" />
+    <Parameter Name="P_TIPO_MENU" Type="number" Mode="In" />
+    <Parameter Name="P_ESTILO_MENU" Type="number" Mode="In" />
+    <Parameter Name="P_DESCRIPCION_MENU" Type="varchar2" Mode="In" />
+    <Parameter Name="P_VALOR_MENU" Type="number" Mode="In" />
+    <Parameter Name="P_CANTIDAD_MENU" Type="number" Mode="In" />
+    <Parameter Name="P_ESTADO_MENU" Type="number" Mode="In" />
+  </Function>
+  <Function Name="INSERTAR_ORDEN_PEDIDO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="HR">
+    <Parameter Name="P_ID_PROVEEDOR" Type="number" Mode="In" />
+    <Parameter Name="P_PRODUCTOS_CODIGOS" Type="varchar2" Mode="In" />
+    <Parameter Name="P_CANTIDAD_PRODUCTO" Type="number" Mode="In" />
+    <Parameter Name="P_CODIGO_ORDEN_PEDIDO" Type="number" Mode="In" />
+  </Function>
+  <Function Name="INSERTAR_PRODUCTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="HR">
+    <Parameter Name="P_NOMBRE_PRODUCTO" Type="varchar2" Mode="In" />
+    <Parameter Name="P_STOCK_PRODUCTO" Type="number" Mode="In" />
+    <Parameter Name="P_ID_PROVEEDOR" Type="number" Mode="In" />
+    <Parameter Name="P_ESTADO_PRODUCTO" Type="number" Mode="In" />
+  </Function>
+  <Function Name="INSERTAR_PROVEEDOR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="HR">
+    <Parameter Name="NOMBRE_PROVEEDOR" Type="varchar2" Mode="In" />
+    <Parameter Name="CONTACTO_PROVEEDOR" Type="number" Mode="In" />
+    <Parameter Name="RUBRO_PROVEEDOR" Type="varchar2" Mode="In" />
+    <Parameter Name="DIRECCION_PROVEEDOR" Type="varchar2" Mode="In" />
+    <Parameter Name="CORREO_PROVEEDOR" Type="varchar2" Mode="In" />
+    <Parameter Name="ID_PERFIL" Type="number" Mode="In" />
+  </Function>
+  <Function Name="INSERTAR_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="HR">
+    <Parameter Name="NOMBRE_USUARIO" Type="varchar2" Mode="In" />
+    <Parameter Name="APELLIDO_USUARIO" Type="varchar2" Mode="In" />
+    <Parameter Name="USERNAME" Type="varchar2" Mode="In" />
+    <Parameter Name="PASS" Type="varchar2" Mode="In" />
+    <Parameter Name="ESTADO_PASS" Type="number" Mode="In" />
+    <Parameter Name="ID_PERFIL" Type="number" Mode="In" />
+    <Parameter Name="ID_EMPRESA" Type="number" Mode="In" />
+    <Parameter Name="ID_PERFIL_2" Type="number" Mode="In" />
+  </Function>
+  <Function Name="LIBERAR_COMEDOR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="HR">
+    <Parameter Name="P_ID_COMEDOR" Type="number" Mode="In" />
+  </Function>
+  <Function Name="LIBERAR_HABITACION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="HR">
+    <Parameter Name="P_ID_HABITACION" Type="number" Mode="In" />
+  </Function>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="COMEDORES" EntityType="Self.COMEDORES" Schema="HR" store:Type="Tables" />
+    <EntitySet Name="DETALLE_COMEDORES" EntityType="Self.DETALLE_COMEDORES" Schema="HR" store:Type="Tables" />
+    <EntitySet Name="DETALLE_HABITACIONES" EntityType="Self.DETALLE_HABITACIONES" Schema="HR" store:Type="Tables" />
+    <EntitySet Name="DETALLE_SERVICIO" EntityType="Self.DETALLE_SERVICIO" Schema="HR" store:Type="Tables" />
+    <EntitySet Name="EMPLEADOS" EntityType="Self.EMPLEADOS" Schema="HR" store:Type="Tables" />
+    <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" Schema="HR" store:Type="Tables" />
+    <EntitySet Name="ESTADO_HABITACION" EntityType="Self.ESTADO_HABITACION" Schema="HR" store:Type="Tables" />
+    <EntitySet Name="HABITACION" EntityType="Self.HABITACION" Schema="HR" store:Type="Tables" />
+    <EntitySet Name="HUESPED" EntityType="Self.HUESPED" Schema="HR" store:Type="Tables" />
+    <EntitySet Name="MENU" EntityType="Self.MENU" Schema="HR" store:Type="Tables" />
+    <EntitySet Name="ORDEN_PEDIDO" EntityType="Self.ORDEN_PEDIDO" Schema="HR" store:Type="Tables" />
+    <EntitySet Name="PERFILES_USUARIOS" EntityType="Self.PERFILES_USUARIOS" Schema="HR" store:Type="Tables" />
+    <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="HR" store:Type="Tables" />
+    <EntitySet Name="PROVEEDOR" EntityType="Self.PROVEEDOR" Schema="HR" store:Type="Tables" />
+    <EntitySet Name="USUARIOS" EntityType="Self.USUARIOS" Schema="HR" store:Type="Tables" />
+    <AssociationSet Name="DHES_FK" Association="Self.DHES_FK">
+      <End Role="EMPLEADOS" EntitySet="EMPLEADOS" />
+      <End Role="DETALLE_HABITACIONES" EntitySet="DETALLE_HABITACIONES" />
+    </AssociationSet>
+    <AssociationSet Name="DHHA_FK" Association="Self.DHHA_FK">
+      <End Role="HABITACION" EntitySet="HABITACION" />
+      <End Role="DETALLE_HABITACIONES" EntitySet="DETALLE_HABITACIONES" />
+    </AssociationSet>
+    <AssociationSet Name="DHHU_FK" Association="Self.DHHU_FK">
+      <End Role="HUESPED" EntitySet="HUESPED" />
+      <End Role="DETALLE_HABITACIONES" EntitySet="DETALLE_HABITACIONES" />
+    </AssociationSet>
+    <AssociationSet Name="DTC_FK" Association="Self.DTC_FK">
+      <End Role="COMEDORES" EntitySet="COMEDORES" />
+      <End Role="DETALLE_COMEDORES" EntitySet="DETALLE_COMEDORES" />
+    </AssociationSet>
+    <AssociationSet Name="DTE_FK" Association="Self.DTE_FK">
+      <End Role="EMPLEADOS" EntitySet="EMPLEADOS" />
+      <End Role="DETALLE_COMEDORES" EntitySet="DETALLE_COMEDORES" />
+    </AssociationSet>
+    <AssociationSet Name="DTH_FK" Association="Self.DTH_FK">
+      <End Role="HUESPED" EntitySet="HUESPED" />
+      <End Role="DETALLE_COMEDORES" EntitySet="DETALLE_COMEDORES" />
+    </AssociationSet>
+    <AssociationSet Name="DTM_FK" Association="Self.DTM_FK">
+      <End Role="MENU" EntitySet="MENU" />
+      <End Role="DETALLE_COMEDORES" EntitySet="DETALLE_COMEDORES" />
+    </AssociationSet>
+    <AssociationSet Name="EPU_FK" Association="Self.EPU_FK">
+      <End Role="PERFILES_USUARIOS" EntitySet="PERFILES_USUARIOS" />
+      <End Role="EMPLEADOS" EntitySet="EMPLEADOS" />
+    </AssociationSet>
+    <AssociationSet Name="HEH_FK" Association="Self.HEH_FK">
+      <End Role="ESTADO_HABITACION" EntitySet="ESTADO_HABITACION" />
+      <End Role="HABITACION" EntitySet="HABITACION" />
+    </AssociationSet>
+    <AssociationSet Name="HUESPED_EMPRESA_FK" Association="Self.HUESPED_EMPRESA_FK">
+      <End Role="EMPRESA" EntitySet="EMPRESA" />
+      <End Role="HUESPED" EntitySet="HUESPED" />
+    </AssociationSet>
+    <AssociationSet Name="ORP_FK" Association="Self.ORP_FK">
+      <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+      <End Role="ORDEN_PEDIDO" EntitySet="ORDEN_PEDIDO" />
+    </AssociationSet>
+    <AssociationSet Name="PP_FK" Association="Self.PP_FK">
+      <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+    </AssociationSet>
+    <AssociationSet Name="PPU_FK" Association="Self.PPU_FK">
+      <End Role="PERFILES_USUARIOS" EntitySet="PERFILES_USUARIOS" />
+      <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+    </AssociationSet>
+    <AssociationSet Name="UPU_FK" Association="Self.UPU_FK">
+      <End Role="PERFILES_USUARIOS" EntitySet="PERFILES_USUARIOS" />
+      <End Role="USUARIOS" EntitySet="USUARIOS" />
+    </AssociationSet>
+    <AssociationSet Name="USUARIOS_EMPRESA_FK" Association="Self.USUARIOS_EMPRESA_FK">
+      <End Role="EMPRESA" EntitySet="EMPRESA" />
+      <End Role="USUARIOS" EntitySet="USUARIOS" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

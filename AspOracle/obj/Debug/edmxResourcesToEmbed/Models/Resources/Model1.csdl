@@ -1,0 +1,651 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="COMEDORES">
+    <Key>
+      <PropertyRef Name="ID_COMEDOR" />
+    </Key>
+    <Property Name="ID_COMEDOR" Type="Int32" Nullable="false" />
+    <Property Name="NOMBRE_COMEDOR" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="CAPACIDAD_COMEDOR" Type="Int32" />
+    <Property Name="ESTADO_COMEDOR" Type="Int32" />
+    <NavigationProperty Name="DETALLE_COMEDORES" Relationship="Self.DTC_FK" FromRole="COMEDORES" ToRole="DETALLE_COMEDORES" />
+  </EntityType>
+  <EntityType Name="DETALLE_COMEDORES">
+    <Key>
+      <PropertyRef Name="ID_DETALLE_COMEDOR" />
+    </Key>
+    <Property Name="ID_DETALLE_COMEDOR" Type="Int32" Nullable="false" />
+    <Property Name="ID_COMEDOR" Type="Int32" />
+    <Property Name="ID_HUESPED" Type="Int32" />
+    <Property Name="ID_EMPLEADO" Type="Int32" />
+    <Property Name="ID_MENU" Type="Int32" />
+    <Property Name="FECHA_SOLICITUD" Type="DateTime" Precision="6" />
+    <NavigationProperty Name="COMEDORES" Relationship="Self.DTC_FK" FromRole="DETALLE_COMEDORES" ToRole="COMEDORES" />
+    <NavigationProperty Name="EMPLEADOS" Relationship="Self.DTE_FK" FromRole="DETALLE_COMEDORES" ToRole="EMPLEADOS" />
+    <NavigationProperty Name="HUESPED" Relationship="Self.DTH_FK" FromRole="DETALLE_COMEDORES" ToRole="HUESPED" />
+    <NavigationProperty Name="MENU" Relationship="Self.DTM_FK" FromRole="DETALLE_COMEDORES" ToRole="MENU" />
+    <Property Name="ESTADO_USADO" Type="Decimal" Precision="38" Scale="0" />
+  </EntityType>
+  <EntityType Name="DETALLE_HABITACIONES">
+    <Key>
+      <PropertyRef Name="ID_DETALLE_HABITACION" />
+    </Key>
+    <Property Name="ID_DETALLE_HABITACION" Type="Int32" Nullable="false" />
+    <Property Name="ID_ESTADO_HABITACION" Type="Int32" Nullable="false" />
+    <Property Name="VALOR" Type="Int32" Nullable="false" />
+    <Property Name="HUESPED_ID_HUESPED" Type="Int32" Nullable="false" />
+    <Property Name="HABITACION_ID_HABITACION" Type="Int32" Nullable="false" />
+    <Property Name="EMPLEADOS_ID_EMPLEADO" Type="Int32" Nullable="false" />
+    <Property Name="FECHA_INGRESO" Type="DateTime" Precision="6" Nullable="false" />
+    <NavigationProperty Name="EMPLEADOS" Relationship="Self.DHES_FK" FromRole="DETALLE_HABITACIONES" ToRole="EMPLEADOS" />
+    <NavigationProperty Name="HABITACION" Relationship="Self.DHHA_FK" FromRole="DETALLE_HABITACIONES" ToRole="HABITACION" />
+    <NavigationProperty Name="HUESPED" Relationship="Self.DHHU_FK" FromRole="DETALLE_HABITACIONES" ToRole="HUESPED" />
+  </EntityType>
+  <EntityType Name="DETALLE_SERVICIO">
+    <Key>
+      <PropertyRef Name="ID_DETALLE_SERVICIO" />
+    </Key>
+    <Property Name="ID_DETALLE_SERVICIO" Type="Int32" Nullable="false" />
+    <Property Name="ID_SERVICO" Type="Int32" Nullable="false" />
+    <Property Name="ID_HUESPED" Type="Int32" Nullable="false" />
+    <Property Name="VALOR_SERVICIO" Type="Int32" Nullable="false" />
+    <Property Name="CODIGO_SERVICIO" Type="Int32" Nullable="false" />
+    <Property Name="FECHA_INICIO_RES" Type="DateTime" />
+    <Property Name="FECHA_FIN_RES" Type="DateTime" />
+  </EntityType>
+  <EntityType Name="EMPLEADOS">
+    <Key>
+      <PropertyRef Name="ID_EMPLEADO" />
+    </Key>
+    <Property Name="ID_EMPLEADO" Type="Int32" Nullable="false" />
+    <Property Name="NOMBRE_EMPLEADO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="APELLIDO_EMPLEADO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="TELEFONO_EMPLEADO" Type="Int32" />
+    <Property Name="CORREO_EMPLEADO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="EDAD_EMPLEADO" Type="Int32" />
+    <Property Name="DIRECCION_EMPLEADO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="ID_USUARIO" Type="Int32" />
+    <Property Name="PERFILES_USUARIOS_ID_PERFIL" Type="Int32" />
+    <NavigationProperty Name="DETALLE_COMEDORES" Relationship="Self.DTE_FK" FromRole="EMPLEADOS" ToRole="DETALLE_COMEDORES" />
+    <NavigationProperty Name="DETALLE_HABITACIONES" Relationship="Self.DHES_FK" FromRole="EMPLEADOS" ToRole="DETALLE_HABITACIONES" />
+    <NavigationProperty Name="PERFILES_USUARIOS" Relationship="Self.EPU_FK" FromRole="EMPLEADOS" ToRole="PERFILES_USUARIOS" />
+  </EntityType>
+  <EntityType Name="EMPRESA">
+    <Key>
+      <PropertyRef Name="ID_EMPRESA" />
+    </Key>
+    <Property Name="ID_EMPRESA" Type="Int32" Nullable="false" />
+    <Property Name="RAZON_SOCIAL" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="RUT_EMPRESA" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="DV_RUT_EMPRESA" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="CORREO_EMPRESA" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="DIRECCION_EMPRESA" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="TELEFONO" Type="Int32" />
+    <Property Name="NOMBRE_REPRESENTANTE" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="APELLIDO_REPRESENTANTE" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="HUESPED" Relationship="Self.HUESPED_EMPRESA_FK" FromRole="EMPRESA" ToRole="HUESPED" />
+    <NavigationProperty Name="USUARIOS" Relationship="Self.USUARIOS_EMPRESA_FK" FromRole="EMPRESA" ToRole="USUARIOS" />
+  </EntityType>
+  <EntityType Name="ESTADO_HABITACION">
+    <Key>
+      <PropertyRef Name="ID_ESTADO_HABITACION" />
+    </Key>
+    <Property Name="ID_ESTADO_HABITACION" Type="Int32" Nullable="false" />
+    <Property Name="NOMBRE_ESTADO_HABITACION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="HABITACION" Relationship="Self.HEH_FK" FromRole="ESTADO_HABITACION" ToRole="HABITACION" />
+  </EntityType>
+  <EntityType Name="HABITACION">
+    <Key>
+      <PropertyRef Name="ID_HABITACION" />
+    </Key>
+    <Property Name="ID_HABITACION" Type="Int32" Nullable="false" />
+    <Property Name="NOMBRE_HABITACION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="TIPO_CAMA_HABITACION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="ACCESORIOS_HABITACION" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="VALOR_HABITACION" Type="Int32" />
+    <Property Name="E_ID_ESTADO_HABITACION" Type="Int32" />
+    <NavigationProperty Name="DETALLE_HABITACIONES" Relationship="Self.DHHA_FK" FromRole="HABITACION" ToRole="DETALLE_HABITACIONES" />
+    <NavigationProperty Name="ESTADO_HABITACION" Relationship="Self.HEH_FK" FromRole="HABITACION" ToRole="ESTADO_HABITACION" />
+  </EntityType>
+  <EntityType Name="HUESPED">
+    <Key>
+      <PropertyRef Name="ID_HUESPED" />
+    </Key>
+    <Property Name="ID_HUESPED" Type="Int32" Nullable="false" />
+    <Property Name="NOMBRE_HUESPED" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="APELLIDO_HUESPED" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="RUT_HUESPED" Type="Int32" />
+    <Property Name="DV_RUT_HUESPED" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="TELEFONO_HUESPED" Type="Int32" />
+    <Property Name="CORREO_HUESPED" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="EMPRESA_ID_EMPRESA" Type="Int32" Nullable="false" />
+    <Property Name="ID_ESTADO_HUESPED" Type="Int32" />
+    <NavigationProperty Name="DETALLE_COMEDORES" Relationship="Self.DTH_FK" FromRole="HUESPED" ToRole="DETALLE_COMEDORES" />
+    <NavigationProperty Name="DETALLE_HABITACIONES" Relationship="Self.DHHU_FK" FromRole="HUESPED" ToRole="DETALLE_HABITACIONES" />
+    <NavigationProperty Name="EMPRESA" Relationship="Self.HUESPED_EMPRESA_FK" FromRole="HUESPED" ToRole="EMPRESA" />
+  </EntityType>
+  <EntityType Name="MENU">
+    <Key>
+      <PropertyRef Name="ID_MENU" />
+    </Key>
+    <Property Name="ID_MENU" Type="Int32" Nullable="false" />
+    <Property Name="NOMBRE_MENU" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="TIPO_MENU" Type="Int32" />
+    <Property Name="ESTILO_MENU" Type="Int32" />
+    <Property Name="DESCRIPCION_MENU" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="VALOR_MENU" Type="Int32" />
+    <Property Name="CANTIDAD_MENU" Type="Int32" />
+    <Property Name="ESTADO_MENU" Type="Int32" />
+    <NavigationProperty Name="DETALLE_COMEDORES" Relationship="Self.DTM_FK" FromRole="MENU" ToRole="DETALLE_COMEDORES" />
+  </EntityType>
+  <EntityType Name="PERFILES_USUARIOS">
+    <Key>
+      <PropertyRef Name="ID_PERFIL" />
+    </Key>
+    <Property Name="ID_PERFIL" Type="Int32" Nullable="false" />
+    <Property Name="NOMBRE_PERFIL" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="EMPLEADOS" Relationship="Self.EPU_FK" FromRole="PERFILES_USUARIOS" ToRole="EMPLEADOS" />
+    <NavigationProperty Name="PROVEEDOR" Relationship="Self.PPU_FK" FromRole="PERFILES_USUARIOS" ToRole="PROVEEDOR" />
+    <NavigationProperty Name="USUARIOS" Relationship="Self.UPU_FK" FromRole="PERFILES_USUARIOS" ToRole="USUARIOS" />
+  </EntityType>
+  <EntityType Name="PROVEEDOR">
+    <Key>
+      <PropertyRef Name="ID_PROVEEDOR" />
+    </Key>
+    <Property Name="ID_PROVEEDOR" Type="Int32" Nullable="false" />
+    <Property Name="NOMBRE_PROVEEDOR" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="CONTACTO_PROVEEDOR" Type="Int32" />
+    <Property Name="RUBRO_PROVEEDOR" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="DIRECCION_PROVEEDOR" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="CORREO_PROVEEDOR" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="PERFILES_USUARIOS_ID_PERFIL" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PERFILES_USUARIOS" Relationship="Self.PPU_FK" FromRole="PROVEEDOR" ToRole="PERFILES_USUARIOS" />
+    <NavigationProperty Name="PRODUCTO" Relationship="Model.PP_FK" FromRole="PROVEEDOR" ToRole="PRODUCTO" />
+    <NavigationProperty Name="ORDEN_PEDIDO" Relationship="Model.ORP_FK" FromRole="PROVEEDOR" ToRole="ORDEN_PEDIDO" />
+  </EntityType>
+  <EntityType Name="USUARIOS">
+    <Key>
+      <PropertyRef Name="ID_USUARIO" />
+    </Key>
+    <Property Name="ID_USUARIO" Type="Int32" Nullable="false" />
+    <Property Name="NOMBRE_USUARIO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="APELLIDO_USUARIO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="USERNAME" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="PASSWORD" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="ESTADO_PASSWORD" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="ID_PERFIL" Type="Int32" />
+    <Property Name="EMPRESA_ID_EMPRESA" Type="Int32" Nullable="false" />
+    <Property Name="PERFILES_USUARIOS_ID_PERFIL" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="EMPRESA" Relationship="Self.USUARIOS_EMPRESA_FK" FromRole="USUARIOS" ToRole="EMPRESA" />
+    <NavigationProperty Name="PERFILES_USUARIOS" Relationship="Self.UPU_FK" FromRole="USUARIOS" ToRole="PERFILES_USUARIOS" />
+  </EntityType>
+  <Association Name="DTC_FK">
+    <End Role="COMEDORES" Type="Self.COMEDORES" Multiplicity="0..1" />
+    <End Role="DETALLE_COMEDORES" Type="Self.DETALLE_COMEDORES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COMEDORES">
+        <PropertyRef Name="ID_COMEDOR" />
+      </Principal>
+      <Dependent Role="DETALLE_COMEDORES">
+        <PropertyRef Name="ID_COMEDOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DTE_FK">
+    <End Role="EMPLEADOS" Type="Self.EMPLEADOS" Multiplicity="0..1" />
+    <End Role="DETALLE_COMEDORES" Type="Self.DETALLE_COMEDORES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPLEADOS">
+        <PropertyRef Name="ID_EMPLEADO" />
+      </Principal>
+      <Dependent Role="DETALLE_COMEDORES">
+        <PropertyRef Name="ID_EMPLEADO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DTH_FK">
+    <End Role="HUESPED" Type="Self.HUESPED" Multiplicity="0..1" />
+    <End Role="DETALLE_COMEDORES" Type="Self.DETALLE_COMEDORES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HUESPED">
+        <PropertyRef Name="ID_HUESPED" />
+      </Principal>
+      <Dependent Role="DETALLE_COMEDORES">
+        <PropertyRef Name="ID_HUESPED" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DTM_FK">
+    <End Role="MENU" Type="Self.MENU" Multiplicity="0..1" />
+    <End Role="DETALLE_COMEDORES" Type="Self.DETALLE_COMEDORES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MENU">
+        <PropertyRef Name="ID_MENU" />
+      </Principal>
+      <Dependent Role="DETALLE_COMEDORES">
+        <PropertyRef Name="ID_MENU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DHES_FK">
+    <End Role="EMPLEADOS" Type="Self.EMPLEADOS" Multiplicity="1" />
+    <End Role="DETALLE_HABITACIONES" Type="Self.DETALLE_HABITACIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPLEADOS">
+        <PropertyRef Name="ID_EMPLEADO" />
+      </Principal>
+      <Dependent Role="DETALLE_HABITACIONES">
+        <PropertyRef Name="EMPLEADOS_ID_EMPLEADO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DHHA_FK">
+    <End Role="HABITACION" Type="Self.HABITACION" Multiplicity="1" />
+    <End Role="DETALLE_HABITACIONES" Type="Self.DETALLE_HABITACIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HABITACION">
+        <PropertyRef Name="ID_HABITACION" />
+      </Principal>
+      <Dependent Role="DETALLE_HABITACIONES">
+        <PropertyRef Name="HABITACION_ID_HABITACION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DHHU_FK">
+    <End Role="HUESPED" Type="Self.HUESPED" Multiplicity="1" />
+    <End Role="DETALLE_HABITACIONES" Type="Self.DETALLE_HABITACIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HUESPED">
+        <PropertyRef Name="ID_HUESPED" />
+      </Principal>
+      <Dependent Role="DETALLE_HABITACIONES">
+        <PropertyRef Name="HUESPED_ID_HUESPED" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EPU_FK">
+    <End Role="PERFILES_USUARIOS" Type="Self.PERFILES_USUARIOS" Multiplicity="0..1" />
+    <End Role="EMPLEADOS" Type="Self.EMPLEADOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PERFILES_USUARIOS">
+        <PropertyRef Name="ID_PERFIL" />
+      </Principal>
+      <Dependent Role="EMPLEADOS">
+        <PropertyRef Name="PERFILES_USUARIOS_ID_PERFIL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="HUESPED_EMPRESA_FK">
+    <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="1" />
+    <End Role="HUESPED" Type="Self.HUESPED" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPRESA">
+        <PropertyRef Name="ID_EMPRESA" />
+      </Principal>
+      <Dependent Role="HUESPED">
+        <PropertyRef Name="EMPRESA_ID_EMPRESA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="USUARIOS_EMPRESA_FK">
+    <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="1" />
+    <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPRESA">
+        <PropertyRef Name="ID_EMPRESA" />
+      </Principal>
+      <Dependent Role="USUARIOS">
+        <PropertyRef Name="EMPRESA_ID_EMPRESA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="HEH_FK">
+    <End Role="ESTADO_HABITACION" Type="Self.ESTADO_HABITACION" Multiplicity="0..1" />
+    <End Role="HABITACION" Type="Self.HABITACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTADO_HABITACION">
+        <PropertyRef Name="ID_ESTADO_HABITACION" />
+      </Principal>
+      <Dependent Role="HABITACION">
+        <PropertyRef Name="E_ID_ESTADO_HABITACION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PPU_FK">
+    <End Role="PERFILES_USUARIOS" Type="Self.PERFILES_USUARIOS" Multiplicity="1" />
+    <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PERFILES_USUARIOS">
+        <PropertyRef Name="ID_PERFIL" />
+      </Principal>
+      <Dependent Role="PROVEEDOR">
+        <PropertyRef Name="PERFILES_USUARIOS_ID_PERFIL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UPU_FK">
+    <End Role="PERFILES_USUARIOS" Type="Self.PERFILES_USUARIOS" Multiplicity="1" />
+    <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PERFILES_USUARIOS">
+        <PropertyRef Name="ID_PERFIL" />
+      </Principal>
+      <Dependent Role="USUARIOS">
+        <PropertyRef Name="PERFILES_USUARIOS_ID_PERFIL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="COMEDORES" EntityType="Self.COMEDORES" />
+    <EntitySet Name="DETALLE_COMEDORES" EntityType="Self.DETALLE_COMEDORES" />
+    <EntitySet Name="DETALLE_HABITACIONES" EntityType="Self.DETALLE_HABITACIONES" />
+    <EntitySet Name="DETALLE_SERVICIO" EntityType="Self.DETALLE_SERVICIO" />
+    <EntitySet Name="EMPLEADOS" EntityType="Self.EMPLEADOS" />
+    <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" />
+    <EntitySet Name="ESTADO_HABITACION" EntityType="Self.ESTADO_HABITACION" />
+    <EntitySet Name="HABITACION" EntityType="Self.HABITACION" />
+    <EntitySet Name="HUESPED" EntityType="Self.HUESPED" />
+    <EntitySet Name="MENU" EntityType="Self.MENU" />
+    <EntitySet Name="PERFILES_USUARIOS" EntityType="Self.PERFILES_USUARIOS" />
+    <EntitySet Name="PROVEEDOR" EntityType="Self.PROVEEDOR" />
+    <EntitySet Name="USUARIOS" EntityType="Self.USUARIOS" />
+    <AssociationSet Name="DTC_FK" Association="Self.DTC_FK">
+      <End Role="COMEDORES" EntitySet="COMEDORES" />
+      <End Role="DETALLE_COMEDORES" EntitySet="DETALLE_COMEDORES" />
+    </AssociationSet>
+    <AssociationSet Name="DTE_FK" Association="Self.DTE_FK">
+      <End Role="EMPLEADOS" EntitySet="EMPLEADOS" />
+      <End Role="DETALLE_COMEDORES" EntitySet="DETALLE_COMEDORES" />
+    </AssociationSet>
+    <AssociationSet Name="DTH_FK" Association="Self.DTH_FK">
+      <End Role="HUESPED" EntitySet="HUESPED" />
+      <End Role="DETALLE_COMEDORES" EntitySet="DETALLE_COMEDORES" />
+    </AssociationSet>
+    <AssociationSet Name="DTM_FK" Association="Self.DTM_FK">
+      <End Role="MENU" EntitySet="MENU" />
+      <End Role="DETALLE_COMEDORES" EntitySet="DETALLE_COMEDORES" />
+    </AssociationSet>
+    <AssociationSet Name="DHES_FK" Association="Self.DHES_FK">
+      <End Role="EMPLEADOS" EntitySet="EMPLEADOS" />
+      <End Role="DETALLE_HABITACIONES" EntitySet="DETALLE_HABITACIONES" />
+    </AssociationSet>
+    <AssociationSet Name="DHHA_FK" Association="Self.DHHA_FK">
+      <End Role="HABITACION" EntitySet="HABITACION" />
+      <End Role="DETALLE_HABITACIONES" EntitySet="DETALLE_HABITACIONES" />
+    </AssociationSet>
+    <AssociationSet Name="DHHU_FK" Association="Self.DHHU_FK">
+      <End Role="HUESPED" EntitySet="HUESPED" />
+      <End Role="DETALLE_HABITACIONES" EntitySet="DETALLE_HABITACIONES" />
+    </AssociationSet>
+    <AssociationSet Name="EPU_FK" Association="Self.EPU_FK">
+      <End Role="PERFILES_USUARIOS" EntitySet="PERFILES_USUARIOS" />
+      <End Role="EMPLEADOS" EntitySet="EMPLEADOS" />
+    </AssociationSet>
+    <AssociationSet Name="HUESPED_EMPRESA_FK" Association="Self.HUESPED_EMPRESA_FK">
+      <End Role="EMPRESA" EntitySet="EMPRESA" />
+      <End Role="HUESPED" EntitySet="HUESPED" />
+    </AssociationSet>
+    <AssociationSet Name="USUARIOS_EMPRESA_FK" Association="Self.USUARIOS_EMPRESA_FK">
+      <End Role="EMPRESA" EntitySet="EMPRESA" />
+      <End Role="USUARIOS" EntitySet="USUARIOS" />
+    </AssociationSet>
+    <AssociationSet Name="HEH_FK" Association="Self.HEH_FK">
+      <End Role="ESTADO_HABITACION" EntitySet="ESTADO_HABITACION" />
+      <End Role="HABITACION" EntitySet="HABITACION" />
+    </AssociationSet>
+    <AssociationSet Name="PPU_FK" Association="Self.PPU_FK">
+      <End Role="PERFILES_USUARIOS" EntitySet="PERFILES_USUARIOS" />
+      <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+    </AssociationSet>
+    <AssociationSet Name="UPU_FK" Association="Self.UPU_FK">
+      <End Role="PERFILES_USUARIOS" EntitySet="PERFILES_USUARIOS" />
+      <End Role="USUARIOS" EntitySet="USUARIOS" />
+    </AssociationSet>
+    <FunctionImport Name="ACTUALIZAR_COMEDOR">
+      <Parameter Name="P_ID_COMEDOR" Mode="In" Type="Decimal" />
+      <Parameter Name="P_NOMBRE_COMEDOR" Mode="In" Type="String" />
+      <Parameter Name="P_CAPACIDAD_COMEDOR" Mode="In" Type="Decimal" />
+      <Parameter Name="P_ESTADO_COMEDOR" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="ACTUALIZAR_EMPLEADO">
+      <Parameter Name="P_ID_EMPLEADO" Mode="In" Type="Decimal" />
+      <Parameter Name="P_NOMBRE_EMPLEADO" Mode="In" Type="String" />
+      <Parameter Name="P_APELLIDO_AMPLEADO" Mode="In" Type="String" />
+      <Parameter Name="P_TELEFONO_EMPLEADO" Mode="In" Type="Decimal" />
+      <Parameter Name="P_CORREO_EMPLEADO" Mode="In" Type="String" />
+      <Parameter Name="P_EDAD_EMPLEADO" Mode="In" Type="Decimal" />
+      <Parameter Name="P_DIRECCION_EMPLEADO" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ACTUALIZAR_EMPRESA">
+      <Parameter Name="P_EMPRESAID" Mode="In" Type="Decimal" />
+      <Parameter Name="P_RAZON_SOCIAL" Mode="In" Type="String" />
+      <Parameter Name="P_RUT_EMPRESA" Mode="In" Type="String" />
+      <Parameter Name="P_DV_RUT_EMPRESA" Mode="In" Type="String" />
+      <Parameter Name="P_CORREO" Mode="In" Type="String" />
+      <Parameter Name="P_DIRECCION" Mode="In" Type="String" />
+      <Parameter Name="P_TELEFONO" Mode="In" Type="Decimal" />
+      <Parameter Name="P_NOMBREREP" Mode="In" Type="String" />
+      <Parameter Name="P_APELLIDOREP" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ACTUALIZAR_HABITACION">
+      <Parameter Name="P_ID_HABITACION" Mode="In" Type="Decimal" />
+      <Parameter Name="P_NOMBRE_HABITACION" Mode="In" Type="String" />
+      <Parameter Name="P_TIPO_CAMA_HABITACION" Mode="In" Type="String" />
+      <Parameter Name="P_ACCESORIOS_HABITACION" Mode="In" Type="String" />
+      <Parameter Name="P_VALOR_HABITACION" Mode="In" Type="Decimal" />
+      <Parameter Name="P_ID_ESTADO_H" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="ACTUALIZAR_HUESPED">
+      <Parameter Name="P_ID_HUESPUED" Mode="In" Type="Decimal" />
+      <Parameter Name="P_NOMBRE_HUESPED" Mode="In" Type="String" />
+      <Parameter Name="P_APELLIDO_HUESPED" Mode="In" Type="String" />
+      <Parameter Name="P_RUT_HUESPED" Mode="In" Type="Decimal" />
+      <Parameter Name="P_DV_RUT_HUESPED" Mode="In" Type="String" />
+      <Parameter Name="P_TELEFONO" Mode="In" Type="Decimal" />
+      <Parameter Name="P_CORREO" Mode="In" Type="String" />
+      <Parameter Name="P_EMPRESA_ID" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="ACTUALIZAR_MENU">
+      <Parameter Name="P_ID_MENU" Mode="In" Type="Decimal" />
+      <Parameter Name="P_NOMBRE_MENU" Mode="In" Type="String" />
+      <Parameter Name="P_TIPO_MENU" Mode="In" Type="Decimal" />
+      <Parameter Name="P_ESTILO_MENU" Mode="In" Type="Decimal" />
+      <Parameter Name="P_DESCRIPCION_MENU" Mode="In" Type="String" />
+      <Parameter Name="P_VALOR_MENU" Mode="In" Type="Decimal" />
+      <Parameter Name="P_CANTIDAD_MENU" Mode="In" Type="Decimal" />
+      <Parameter Name="P_ESTADO_MENU" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="ACTUALIZAR_PROVEEDOR">
+      <Parameter Name="P_ID_PROVEEDOR" Mode="In" Type="Decimal" />
+      <Parameter Name="P_NOMBRE_PROVEEDOR" Mode="In" Type="String" />
+      <Parameter Name="P_CONTACTO_PROVEEDOR" Mode="In" Type="Decimal" />
+      <Parameter Name="P_RUBRO_PROVEEDOR" Mode="In" Type="String" />
+      <Parameter Name="P_DIRECCION_PROVEEDOR" Mode="In" Type="String" />
+      <Parameter Name="P_CORREO_PROVEEDOR" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ELIMINAR_COMEDOR">
+      <Parameter Name="P_COMEDORID" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="ELIMINAR_EMPLEADO">
+      <Parameter Name="EMPLEADOID" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="ELIMINAR_EMPRESA">
+      <Parameter Name="EMPRESAID" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="ELIMINAR_HABITACION">
+      <Parameter Name="P_HABITACIONID" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="ELIMINAR_HUESPED">
+      <Parameter Name="HUESPEDID" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="ELIMINAR_MENU">
+      <Parameter Name="P_MENUID" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="ELIMINAR_PROVEEDOR">
+      <Parameter Name="PROVEEDORID" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="INSERTAR_COMEDOR">
+      <Parameter Name="P_NOMBRE_COMEDOR" Mode="In" Type="String" />
+      <Parameter Name="P_CAPACIDAD_COMEDOR" Mode="In" Type="Decimal" />
+      <Parameter Name="P_ESTADO_COMEDOR" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="INSERTAR_DETALLE_COMEDOR">
+      <Parameter Name="P_ID_COMEDOR" Mode="In" Type="Decimal" />
+      <Parameter Name="P_ID_HUESPED" Mode="In" Type="Decimal" />
+      <Parameter Name="P_ID_EMPLEADO" Mode="In" Type="Decimal" />
+      <Parameter Name="P_ID_MENU" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="INSERTAR_DETALLE_HABITACION">
+      <Parameter Name="P_ID_ESTADO_HABITACION" Mode="In" Type="Decimal" />
+      <Parameter Name="P_VALOR" Mode="In" Type="Decimal" />
+      <Parameter Name="P_HUESPED_ID_HUESPED" Mode="In" Type="Decimal" />
+      <Parameter Name="P_HABITACION_ID_HABITACION" Mode="In" Type="Decimal" />
+      <Parameter Name="P_EMPLEADOS_ID_EMPLEADO" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="INSERTAR_DETALLE_SERVICIO">
+      <Parameter Name="P_ID_SERVICIO" Mode="In" Type="Decimal" />
+      <Parameter Name="P_ID_HUESPED" Mode="In" Type="Decimal" />
+      <Parameter Name="P_VALOR_SERVICIO" Mode="In" Type="Decimal" />
+      <Parameter Name="P_CODIGO_RESERVA" Mode="In" Type="Decimal" />
+      <Parameter Name="P_FECHA_INICIO" Mode="In" Type="DateTime" />
+      <Parameter Name="P_FECHA_FIN" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="INSERTAR_EMPLEADOS">
+      <Parameter Name="NOMBRE_EMPLEADO" Mode="In" Type="String" />
+      <Parameter Name="APELLIDO_EMPLEADO" Mode="In" Type="String" />
+      <Parameter Name="TELEFONO_EMPLEADO" Mode="In" Type="Decimal" />
+      <Parameter Name="CORREO_EMPLEADO" Mode="In" Type="String" />
+      <Parameter Name="EDAD_EMPLEADO" Mode="In" Type="Decimal" />
+      <Parameter Name="DIRECCION_EMPELADO" Mode="In" Type="String" />
+      <Parameter Name="ID_USUARIO" Mode="In" Type="Decimal" />
+      <Parameter Name="ID_PERFIL" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="INSERTAR_EMPRESA">
+      <Parameter Name="RAZON_SOCIAL" Mode="In" Type="String" />
+      <Parameter Name="RUT_EMPRESA" Mode="In" Type="String" />
+      <Parameter Name="DV_RUT_EMPRESA" Mode="In" Type="String" />
+      <Parameter Name="CORREO" Mode="In" Type="String" />
+      <Parameter Name="DIRECCION" Mode="In" Type="String" />
+      <Parameter Name="TELEFONO" Mode="In" Type="Decimal" />
+      <Parameter Name="NOMBREREP" Mode="In" Type="String" />
+      <Parameter Name="APELLIDOREP" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="INSERTAR_HABITACION">
+      <Parameter Name="P_NOMBRE_HABITACION" Mode="In" Type="String" />
+      <Parameter Name="P_TIPO_CAMA_HABITACION" Mode="In" Type="String" />
+      <Parameter Name="P_ACCESORIOS_HABITACION" Mode="In" Type="String" />
+      <Parameter Name="P_VALOR_HABITACION" Mode="In" Type="Decimal" />
+      <Parameter Name="P_ESTADO_HABITACION" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="INSERTAR_HUESPED">
+      <Parameter Name="P_NOMBRE_HUESPED" Mode="In" Type="String" />
+      <Parameter Name="P_APELLIDO_HUESPED" Mode="In" Type="String" />
+      <Parameter Name="P_RUT_HUESPED" Mode="In" Type="Decimal" />
+      <Parameter Name="P_DV_RUT_HUESPED" Mode="In" Type="String" />
+      <Parameter Name="P_TELEFONO_HUESPED" Mode="In" Type="Decimal" />
+      <Parameter Name="P_CORREO_HUESPED" Mode="In" Type="String" />
+      <Parameter Name="P_ID_EMPRESA" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="INSERTAR_MENU">
+      <Parameter Name="P_NOMBRE_MENU" Mode="In" Type="String" />
+      <Parameter Name="P_TIPO_MENU" Mode="In" Type="Decimal" />
+      <Parameter Name="P_ESTILO_MENU" Mode="In" Type="Decimal" />
+      <Parameter Name="P_DESCRIPCION_MENU" Mode="In" Type="String" />
+      <Parameter Name="P_VALOR_MENU" Mode="In" Type="Decimal" />
+      <Parameter Name="P_CANTIDAD_MENU" Mode="In" Type="Decimal" />
+      <Parameter Name="P_ESTADO_MENU" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="INSERTAR_PROVEEDOR">
+      <Parameter Name="NOMBRE_PROVEEDOR" Mode="In" Type="String" />
+      <Parameter Name="CONTACTO_PROVEEDOR" Mode="In" Type="Decimal" />
+      <Parameter Name="RUBRO_PROVEEDOR" Mode="In" Type="String" />
+      <Parameter Name="DIRECCION_PROVEEDOR" Mode="In" Type="String" />
+      <Parameter Name="CORREO_PROVEEDOR" Mode="In" Type="String" />
+      <Parameter Name="ID_PERFIL" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="INSERTAR_USUARIO">
+      <Parameter Name="NOMBRE_USUARIO" Mode="In" Type="String" />
+      <Parameter Name="APELLIDO_USUARIO" Mode="In" Type="String" />
+      <Parameter Name="USERNAME" Mode="In" Type="String" />
+      <Parameter Name="PASS" Mode="In" Type="String" />
+      <Parameter Name="ESTADO_PASS" Mode="In" Type="Decimal" />
+      <Parameter Name="ID_PERFIL" Mode="In" Type="Decimal" />
+      <Parameter Name="ID_EMPRESA" Mode="In" Type="Decimal" />
+      <Parameter Name="ID_PERFIL_2" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="LIBERAR_COMEDOR">
+      <Parameter Name="P_ID_COMEDOR" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="LIBERAR_HABITACION">
+      <Parameter Name="P_ID_HABITACION" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <EntitySet Name="PRODUCTO" EntityType="Model.PRODUCTO" />
+    <AssociationSet Name="PP_FK" Association="Model.PP_FK">
+      <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+    </AssociationSet>
+    <FunctionImport Name="INSERTAR_PRODUCTO">
+      <Parameter Name="P_NOMBRE_PRODUCTO" Mode="In" Type="String" />
+      <Parameter Name="P_STOCK_PRODUCTO" Mode="In" Type="Decimal" />
+      <Parameter Name="P_ID_PROVEEDOR" Mode="In" Type="Decimal" />
+      <Parameter Name="P_ESTADO_PRODUCTO" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <EntitySet Name="ORDEN_PEDIDO" EntityType="Model.ORDEN_PEDIDO" />
+    <AssociationSet Name="ORP_FK" Association="Model.ORP_FK">
+      <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+      <End Role="ORDEN_PEDIDO" EntitySet="ORDEN_PEDIDO" />
+    </AssociationSet>
+    <FunctionImport Name="INSERTAR_ORDEN_PEDIDO">
+      <Parameter Name="P_ID_PROVEEDOR" Mode="In" Type="Decimal" />
+      <Parameter Name="P_PRODUCTOS_CODIGOS" Mode="In" Type="String" />
+      <Parameter Name="P_CANTIDAD_PRODUCTO" Mode="In" Type="Decimal" />
+      <Parameter Name="P_CODIGO_ORDEN_PEDIDO" Mode="In" Type="Decimal" />
+    </FunctionImport>
+  </EntityContainer>
+  <EntityType Name="PRODUCTO">
+    <Key>
+      <PropertyRef Name="ID_PRODUCTO" />
+    </Key>
+    <Property Name="ID_PRODUCTO" Type="Int32" Nullable="false" />
+    <Property Name="NOMBRE_PRODUCTO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="STOCK_PRODUCTO" Type="Int32" />
+    <Property Name="ID_PROVEEDOR" Type="Int32" />
+    <Property Name="ESTADO_PRODUCTO" Type="Int32" />
+    <NavigationProperty Name="PROVEEDOR" Relationship="Model.PP_FK" FromRole="PRODUCTO" ToRole="PROVEEDOR" />
+  </EntityType>
+  <Association Name="PP_FK">
+    <End Type="Model.PROVEEDOR" Role="PROVEEDOR" Multiplicity="0..1" />
+    <End Type="Model.PRODUCTO" Role="PRODUCTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROVEEDOR">
+        <PropertyRef Name="ID_PROVEEDOR" />
+      </Principal>
+      <Dependent Role="PRODUCTO">
+        <PropertyRef Name="ID_PROVEEDOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ORDEN_PEDIDO">
+    <Key>
+      <PropertyRef Name="ID_ORDEN_PEDIDO" />
+    </Key>
+    <Property Name="ID_ORDEN_PEDIDO" Type="Int32" Nullable="false" />
+    <Property Name="ID_PROVEEDOR" Type="Int32" />
+    <Property Name="PRODUCTOS_CODIGOS" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="CANTIDAD_PRODUCTO" Type="Int32" />
+    <Property Name="CODIGO_ORDEN_PEDIDO" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PROVEEDOR" Relationship="Model.ORP_FK" FromRole="ORDEN_PEDIDO" ToRole="PROVEEDOR" />
+  </EntityType>
+  <Association Name="ORP_FK">
+    <End Type="Model.PROVEEDOR" Role="PROVEEDOR" Multiplicity="0..1" />
+    <End Type="Model.ORDEN_PEDIDO" Role="ORDEN_PEDIDO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROVEEDOR">
+        <PropertyRef Name="ID_PROVEEDOR" />
+      </Principal>
+      <Dependent Role="ORDEN_PEDIDO">
+        <PropertyRef Name="ID_PROVEEDOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
